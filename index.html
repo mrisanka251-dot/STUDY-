@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎓 STUDY පොඩ්ඩෝ | ඉගෙන ගනිමු සල්ලි හොයමු!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============ CSS VARIABLES & THEME ============ */
+        :root {
+            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 70%, #f5576c 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.95);
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --success: #51CF66;
+            --warning: #FFB84D;
+            --danger: #FF6B6B;
+            --purple: #9775FA;
+            --coin-gold: #FFD700;
+            --nav-bg: rgba(255, 255, 255, 0.98);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --input-bg: #f8f9fa;
+            --scrollbar: rgba(0, 0, 0, 0.2);
+            --note-math: linear-gradient(135deg, #667eea, #764ba2);
+            --note-science: linear-gradient(135deg, #11998e, #38ef7d);
+            --note-sinhala: linear-gradient(135deg, #eb3349, #f45c43);
+            --note-english: linear-gradient(135deg, #4facfe, #00f2fe);
+            --note-ict: linear-gradient(135deg, #fa709a, #fee140);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 70%, #1a1a2e 100%);
+            --bg-secondary: rgba(30, 30, 50, 0.95);
+            --text-primary: #f8f9fa;
+            --text-secondary: #adb5bd;
+            --card-bg: rgba(40, 40, 70, 0.98);
+            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --primary: #FF8E8E;
+            --secondary: #7EE8E1;
+            --accent: #FFF0A3;
+            --success: #69DB7C;
+            --warning: #FFD480;
+            --danger: #FF8E8E;
+            --purple: #B197FC;
+            --coin-gold: #FFEA00;
+            --nav-bg: rgba(30, 30, 50, 0.98);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --input-bg: #2a2a4a;
+            --scrollbar: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ============ BASE STYLES ============ */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            background: var(--bg-primary);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding-bottom: 90px;
+            overflow-x: hidden;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        @keyframes gradientBG {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ============ ANIMATED BACKGROUND ============ */
+        .bg-animation {
+            position: fixed; width: 100%; height: 100%; top: 0; left: 0;
+            z-index: -1; overflow: hidden; pointer-events: none;
+        }
+        .bg-bubble {
+            position: absolute; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+        .bg-star {
+            position: absolute; width: 4px; height: 4px;
+            background: white; border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+            box-shadow: 0 0 10px white;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            background: var(--bg-secondary);
+            backdrop-filter: blur(20px);
+            padding: 15px 20px;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: var(--card-shadow);
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+        .header-content {
+            display: flex; justify-content: space-between;
+            align-items: center; max-width: 1200px; margin: 0 auto;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { font-size: 32px; animation: bounce 2s infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .logo-text {
+            font-size: 22px; font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header-actions { display: flex; align-items: center; gap: 10px; }
+        .header-btn {
+            width: 40px; height: 40px; border-radius: 50%;
+            border: none; background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .header-btn:hover { transform: scale(1.1) rotate(10deg); }
+        .user-stats { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; justify-content: center; }
+        .stat-pill {
+            display: flex; align-items: center; gap: 5px;
+            padding: 6px 14px; background: var(--card-bg);
+            border-radius: 25px; font-size: 13px; font-weight: 700;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+        .stat-pill.coins { color: var(--coin-gold); }
+        .stat-pill.level { color: var(--purple); }
+        .stat-pill.streak { color: var(--warning); }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+
+        /* ============ MAIN CONTAINER ============ */
+        .container { max-width: 650px; margin: 20px auto; padding: 0 15px; position: relative; z-index: 1; }
+        .section { display: none; animation: slideUp 0.4s ease-out; }
+        .section.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ============ CARDS ============ */
+        .card {
+            background: var(--card-bg); border-radius: 25px; padding: 25px;
+            margin-bottom: 20px; box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-title {
+            font-size: 20px; font-weight: 900; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px; color: var(--text-primary);
+        }
+
+        /* ============ 🔔 ENHANCED NOTIFICATION SYSTEM ============ */
+        .notification-container {
+            position: fixed; top: 20px; right: 20px; left: 20px;
+            max-width: 400px; margin: 0 auto; z-index: 9999;
+            pointer-events: none; display: flex; flex-direction: column; gap: 10px;
+        }
+
+        .notification {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            border-left: 5px solid var(--success);
+            pointer-events: auto;
+            animation: notifSlideIn 0.4s ease forwards;
+            max-width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notification::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; height: 4px;
+            background: var(--success);
+            animation: notifProgress 3s linear forwards;
+            width: 100%;
+        }
+
+        @keyframes notifSlideIn {
+            from { opacity: 0; transform: translateX(100px) scale(0.9); }
+            to { opacity: 1; transform: translateX(0) scale(1); }
+        }
+
+        @keyframes notifSlideOut {
+            to { opacity: 0; transform: translateX(100px) scale(0.9); height: 0; padding: 0; margin: 0; }
+        }
+
+        @keyframes notifProgress { from { width: 100%; } to { width: 0%; } }
+
+        .notification.success { border-left-color: var(--success); }
+        .notification.success::before { background: var(--success); }
+        .notification.error { border-left-color: var(--danger); }
+        .notification.error::before { background: var(--danger); }
+        .notification.warning { border-left-color: var(--warning); }
+        .notification.warning::before { background: var(--warning); }
+        .notification.info { border-left-color: var(--secondary); }
+        .notification.info::before { background: var(--secondary); }
+
+        .notification.hiding { animation: notifSlideOut 0.3s ease forwards; }
+
+        .notification-icon {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--success), #69DB7C);
+            color: white;
+        }
+        .notification.error .notification-icon { background: linear-gradient(135deg, var(--danger), #FF8E8E); }
+        .notification.warning .notification-icon { background: linear-gradient(135deg, var(--warning), #FFD480); }
+        .notification.info .notification-icon { background: linear-gradient(135deg, var(--secondary), #7EE8E1); }
+
+        .notification-content { flex: 1; min-width: 0; }
+        .notification-title { font-weight: 700; font-size: 15px; margin-bottom: 3px; color: var(--text-primary); }
+        .notification-message { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+        .notification-close {
+            width: 28px; height: 28px; border-radius: 50%; border: none;
+            background: var(--input-bg); color: var(--text-secondary);
+            font-size: 14px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; flex-shrink: 0;
+        }
+        .notification-close:hover { background: var(--danger); color: white; transform: scale(1.1); }
+
+        .notification.swiping { transition: transform 0.1s ease; }
+        .notification.swiped-out { transform: translateX(150%) !important; opacity: 0; }
+
+        /* ============ 📝 SHORT NOTES SYSTEM ============ */
+        .notes-header { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .notes-search { flex: 1; min-width: 200px; position: relative; }
+        .notes-search input {
+            width: 100%; padding: 12px 15px 12px 40px;
+            border: 2px solid var(--border-color); border-radius: 15px;
+            background: var(--input-bg); color: var(--text-primary);
+            font-size: 14px; transition: border-color 0.3s;
+        }
+        .notes-search input:focus { outline: none; border-color: var(--secondary); }
+        .notes-search i {
+            position: absolute; left: 15px; top: 50%;
+            transform: translateY(-50%); color: var(--text-secondary);
+        }
+
+        .notes-filter { display: flex; gap: 8px; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 8px 16px; border: 2px solid var(--border-color);
+            border-radius: 20px; background: var(--input-bg);
+            color: var(--text-primary); font-size: 12px; font-weight: 600;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--primary); background: var(--primary); color: white;
+        }
+
+        .subject-tabs {
+            display: flex; gap: 8px; margin-bottom: 20px;
+            overflow-x: auto; padding-bottom: 5px; scrollbar-width: none;
+        }
+        .subject-tabs::-webkit-scrollbar { display: none; }
+        
+        .subject-tab {
+            padding: 10px 20px; border-radius: 15px;
+            background: var(--input-bg); border: 2px solid var(--border-color);
+            font-weight: 600; font-size: 13px; cursor: pointer;
+            white-space: nowrap; transition: all 0.3s;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .subject-tab:hover, .subject-tab.active {
+            border-color: var(--secondary);
+            background: linear-gradient(135deg, rgba(78,205,196,0.15), rgba(255,107,107,0.15));
+            transform: scale(1.05);
+        }
+        .subject-tab.math { color: #667eea; }
+        .subject-tab.science { color: #11998e; }
+        .subject-tab.sinhala { color: #eb3349; }
+        .subject-tab.english { color: #4facfe; }
+        .subject-tab.ict { color: #fa709a; }
+
+        .notes-grid { display: grid; gap: 15px; }
+
+        .note-card {
+            background: var(--card-bg); border-radius: 20px;
+            padding: 20px; border: 2px solid var(--border-color);
+            transition: all 0.3s ease; cursor: pointer;
+            position: relative; overflow: hidden;
+        }
+        .note-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: var(--note-math);
+        }
+        .note-card.science::before { background: var(--note-science); }
+        .note-card.sinhala::before { background: var(--note-sinhala); }
+        .note-card.english::before { background: var(--note-english); }
+        .note-card.ict::before { background: var(--note-ict); }
+
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            border-color: var(--secondary);
+        }
+
+        .note-card.bookmarked::after {
+            content: '🔖'; position: absolute; top: 15px; right: 15px;
+            font-size: 20px; animation: bounce 1s infinite;
+        }
+
+        .note-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 12px; gap: 10px;
+        }
+        .note-title { font-weight: 700; font-size: 16px; color: var(--text-primary); line-height: 1.4; }
+        .note-subject {
+            font-size: 11px; padding: 4px 10px; border-radius: 10px;
+            background: var(--input-bg); font-weight: 600; text-transform: uppercase;
+        }
+        .note-subject.math { color: #667eea; background: rgba(102,126,234,0.1); }
+        .note-subject.science { color: #11998e; background: rgba(17,153,142,0.1); }
+        .note-subject.sinhala { color: #eb3349; background: rgba(235,51,73,0.1); }
+        .note-subject.english { color: #4facfe; background: rgba(79,172,254,0.1); }
+        .note-subject.ict { color: #fa709a; background: rgba(250,112,154,0.1); }
+
+        .note-preview {
+            font-size: 13px; color: var(--text-secondary);
+            line-height: 1.5; margin-bottom: 12px;
+            display: -webkit-box; -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        .note-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+        .note-tag {
+            font-size: 10px; padding: 3px 10px; border-radius: 8px;
+            background: var(--input-bg); color: var(--text-secondary); font-weight: 600;
+        }
+        .note-tag.formula { background: rgba(102,126,234,0.15); color: #667eea; }
+        .note-tag.definition { background: rgba(17,153,142,0.15); color: #11998e; }
+        .note-tag.tip { background: rgba(255,184,77,0.15); color: #FFB84D; }
+        .note-tag.quick { background: rgba(255,107,107,0.15); color: #FF6B6B; }
+
+        .note-meta {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 11px; color: var(--text-secondary);
+            padding-top: 12px; border-top: 1px dashed var(--border-color);
+        }
+        .note-stats { display: flex; gap: 12px; }
+        .note-stat { display: flex; align-items: center; gap: 4px; }
+        
+        .note-actions { display: flex; gap: 8px; }
+        .note-action-btn {
+            width: 32px; height: 32px; border-radius: 10px;
+            border: none; background: var(--input-bg);
+            color: var(--text-secondary); font-size: 14px;
+            cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .note-action-btn:hover { background: var(--primary); color: white; transform: scale(1.1); }
+        .note-action-btn.bookmark.active { background: var(--warning); color: #333; }
+
+        /* ============ NOTE PREVIEW MODAL ============ */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            z-index: 2000; display: none;
+            align-items: center; justify-content: center;
+            padding: 20px; animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.show { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .modal {
+            background: var(--card-bg); border-radius: 25px;
+            max-width: 600px; width: 100%; max-height: 90vh;
+            overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: modalSlideUp 0.4s ease;
+            display: flex; flex-direction: column;
+        }
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 20px 25px; border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+        }
+        .modal-title { font-size: 18px; font-weight: 700; }
+        .modal-close {
+            width: 36px; height: 36px; border-radius: 50%;
+            border: none; background: rgba(255,255,255,0.2);
+            color: white; font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .modal-close:hover { background: rgba(255,255,255,0.3); }
+
+        .modal-body { padding: 25px; overflow-y: auto; flex: 1; }
+        .modal-content { font-size: 15px; line-height: 1.8; color: var(--text-primary); }
+        .modal-content h4 { margin: 15px 0 8px; color: var(--primary); font-weight: 700; }
+        .modal-content ul { padding-left: 20px; margin: 10px 0; }
+        .modal-content li { margin: 5px 0; }
+        .modal-content .formula {
+            background: var(--input-bg); padding: 15px;
+            border-radius: 12px; margin: 10px 0;
+            font-family: monospace; font-weight: 600;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .modal-footer {
+            padding: 15px 25px; border-top: 1px solid var(--border-color);
+            display: flex; gap: 10px; flex-wrap: wrap;
+            background: var(--bg-secondary);
+        }
+        .modal-btn {
+            flex: 1; min-width: 100px; padding: 12px;
+            border: none; border-radius: 12px; font-weight: 600;
+            font-size: 13px; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .modal-btn.download { background: linear-gradient(135deg, var(--success), #69DB7C); color: white; }
+        .modal-btn.copy { background: linear-gradient(135deg, var(--secondary), #7EE8E1); color: #1a1a2e; }
+        .modal-btn.share { background: linear-gradient(135deg, var(--accent), #FFF0A3); color: #333; }
+        .modal-btn.bookmark { background: var(--input-bg); color: var(--text-primary); border: 2px solid var(--border-color); }
+        .modal-btn.bookmark.active { background: var(--warning); color: #333; border-color: var(--warning); }
+        .modal-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+
+        .download-progress { margin-top: 10px; display: none; }
+        .download-progress.show { display: block; }
+        .download-progress-bar { height: 6px; background: var(--input-bg); border-radius: 10px; overflow: hidden; margin-bottom: 5px; }
+        .download-progress-fill { height: 100%; background: var(--success); border-radius: 10px; width: 0%; transition: width 0.3s ease; }
+        .download-progress-text { font-size: 11px; color: var(--text-secondary); text-align: center; }
+
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
+        .empty-state-icon { font-size: 60px; margin-bottom: 15px; opacity: 0.5; }
+        .empty-state-title { font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+        .empty-state-desc { font-size: 14px; }
+
+        .bookmarks-list { display: flex; flex-direction: column; gap: 12px; }
+        .bookmark-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 15px; background: var(--input-bg);
+            border-radius: 15px; cursor: pointer; transition: transform 0.2s;
+        }
+        .bookmark-item:hover { transform: translateX(5px); }
+        .bookmark-icon {
+            width: 45px; height: 45px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; background: var(--note-math); color: white; flex-shrink: 0;
+        }
+        .bookmark-info { flex: 1; min-width: 0; }
+        .bookmark-title { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+        .bookmark-subject { font-size: 11px; color: var(--text-secondary); }
+        .bookmark-remove {
+            width: 30px; height: 30px; border-radius: 50%;
+            border: none; background: var(--danger); color: white;
+            font-size: 14px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.2s;
+        }
+        .bookmark-remove:hover { transform: scale(1.1); }
+
+        /* ============ QUIZ STYLES ============ */
+        .daily-bonus {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            color: white; padding: 15px; border-radius: 15px;
+            margin-bottom: 15px; cursor: pointer; transition: transform 0.3s;
+        }
+        .daily-bonus:hover { transform: scale(1.05); }
+        .daily-bonus.claimed { opacity: 0.5; pointer-events: none; background: #ccc; }
+
+        .quiz-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px; padding-bottom: 15px;
+            border-bottom: 2px dashed var(--border-color);
+        }
+        .timer {
+            display: flex; align-items: center; gap: 5px;
+            font-weight: 700; color: var(--danger); font-size: 18px;
+        }
+        .timer.warning { animation: pulse 0.5s infinite; }
+
+        .progress-wrapper { margin-bottom: 20px; }
+        .progress-label {
+            display: flex; justify-content: space-between;
+            font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;
+        }
+        .progress-bar {
+            height: 12px; background: var(--input-bg);
+            border-radius: 10px; overflow: hidden; position: relative;
+        }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 10px; transition: width 0.5s ease; position: relative;
+        }
+        .progress-fill::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        .question-card { text-align: center; padding: 20px; }
+        .question-text {
+            font-size: 20px; font-weight: 700; margin: 20px 0; line-height: 1.5;
+            padding: 20px; background: linear-gradient(135deg, var(--input-bg), rgba(255,255,255,0.5));
+            border-radius: 20px; border-left: 5px solid var(--primary);
+        }
+
+        .options-grid { display: grid; gap: 12px; margin: 20px 0; }
+        .option-card {
+            padding: 18px; border: 3px solid var(--border-color);
+            border-radius: 18px; background: var(--input-bg);
+            cursor: pointer; font-weight: 600; font-size: 16px;
+            transition: all 0.3s ease; display: flex; align-items: center;
+            gap: 12px; position: relative; overflow: hidden;
+        }
+        .option-card:hover { transform: translateX(5px); border-color: var(--secondary); }
+        .option-card.correct { border-color: var(--success); background: linear-gradient(135deg, rgba(81,207,102,0.2), rgba(81,207,102,0.1)); animation: correctBounce 0.5s ease; }
+        .option-card.wrong { border-color: var(--danger); background: linear-gradient(135deg, rgba(255,107,107,0.2), rgba(255,107,107,0.1)); animation: shake 0.5s ease; }
+
+        @keyframes correctBounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+        .option-letter {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; flex-shrink: 0;
+        }
+        .option-card.correct .option-letter { background: var(--success); }
+        .option-card.wrong .option-letter { background: var(--danger); }
+
+        .feedback { margin-top: 20px; padding: 15px; border-radius: 15px; font-weight: 700; display: none; }
+        .feedback.show { display: block; animation: slideDown 0.3s ease; }
+        .feedback.success { background: rgba(81,207,102,0.15); color: var(--success); border: 2px solid var(--success); }
+        .feedback.error { background: rgba(255,107,107,0.15); color: var(--danger); border: 2px solid var(--danger); }
+
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .action-buttons { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+        .btn {
+            padding: 14px 28px; border: none; border-radius: 25px;
+            font-weight: 700; font-size: 15px; cursor: pointer;
+            transition: all 0.3s ease; display: flex; align-items: center;
+            gap: 8px; position: relative; overflow: hidden;
+        }
+        .btn::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 0; height: 0; background: rgba(255,255,255,0.3);
+            border-radius: 50%; transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn:active::after { width: 300px; height: 300px; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #FF8E8E); color: white; box-shadow: 0 5px 20px rgba(255,107,107,0.4); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,107,107,0.6); }
+        .btn-secondary { background: linear-gradient(135deg, var(--secondary), #7EE8E1); color: #1a1a2e; box-shadow: 0 5px 20px rgba(78,205,196,0.4); }
+        .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(78,205,196,0.6); }
+        .btn-hint { background: linear-gradient(135deg, var(--accent), #FFF0A3); color: #333; box-shadow: 0 5px 20px rgba(255,230,109,0.4); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .hint-cost { font-size: 12px; opacity: 0.8; margin-left: 5px; }
+
+        /* ============ WHEEL SPINNER ============ */
+        .wheel-container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .wheel-wrapper { position: relative; width: 280px; height: 280px; margin: 20px 0; }
+        .wheel {
+            width: 100%; height: 100%; border-radius: 50%;
+            border: 8px solid white; position: relative;
+            overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+        .wheel-segment {
+            position: absolute; width: 50%; height: 50%;
+            transform-origin: bottom right; display: flex;
+            align-items: center; justify-content: center;
+            padding-left: 40px; box-sizing: border-box;
+            font-weight: 700; font-size: 14px; color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .wheel-pointer {
+            position: absolute; top: -15px; left: 50%;
+            transform: translateX(-50%); width: 40px; height: 50px;
+            background: var(--danger);
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            z-index: 10; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+        }
+        .wheel-center {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 60px; height: 60px;
+            background: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; font-weight: 900; color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 5;
+        }
+        .spin-btn { margin-top: 20px; padding: 15px 50px; font-size: 18px; }
+        .wheel-result { margin-top: 20px; font-size: 20px; font-weight: 700; min-height: 30px; }
+
+        /* ============ SHOP & INVENTORY ============ */
+        .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .shop-item {
+            background: var(--input-bg); border: 3px solid var(--border-color);
+            border-radius: 20px; padding: 20px; text-align: center;
+            cursor: pointer; transition: all 0.3s ease; position: relative;
+        }
+        .shop-item:hover { transform: scale(1.03) rotate(1deg); border-color: var(--accent); box-shadow: 0 8px 25px rgba(255,230,109,0.3); }
+        .shop-item.owned { opacity: 0.7; cursor: default; }
+        .shop-item.owned::after {
+            content: '✓'; position: absolute; top: 10px; right: 10px;
+            width: 25px; height: 25px; background: var(--success);
+            color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-weight: 900; font-size: 14px;
+        }
+        .item-icon { font-size: 45px; margin-bottom: 10px; display: block; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .item-name { font-weight: 700; margin-bottom: 5px; font-size: 14px; }
+        .item-price { color: var(--coin-gold); font-weight: 900; font-size: 16px; }
+        .item-rarity { font-size: 10px; padding: 3px 10px; border-radius: 10px; display: inline-block; margin-top: 5px; font-weight: 700; }
+        .rarity-common { background: #adb5bd; color: white; }
+        .rarity-rare { background: linear-gradient(135deg, #4dabf7, #339af0); color: white; }
+        .rarity-epic { background: linear-gradient(135deg, #9775fa, #845ef7); color: white; }
+        .rarity-legendary { background: linear-gradient(135deg, #ffd43b, #fab005); color: #333; }
+
+        .inventory-grid { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; min-height: 80px; }
+        .inventory-item { font-size: 40px; animation: bounce 2s infinite; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2)); }
+
+        /* ============ LEADERBOARD ============ */
+        .leaderboard-list { display: flex; flex-direction: column; gap: 10px; }
+        .leaderboard-item {
+            display: flex; align-items: center; gap: 15px;
+            padding: 15px; background: var(--input-bg);
+            border-radius: 15px; transition: transform 0.3s;
+        }
+        .leaderboard-item:hover { transform: translateX(5px); }
+        .leaderboard-item.current-user {
+            background: linear-gradient(135deg, rgba(255,107,107,0.15), rgba(78,205,196,0.15));
+            border: 2px solid var(--primary);
+        }
+        .rank-badge {
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 16px; flex-shrink: 0;
+        }
+        .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); color: #333; }
+        .rank-2 { background: linear-gradient(135deg, #C0C0C0, #A8A8A8); color: #333; }
+        .rank-3 { background: linear-gradient(135deg, #CD7F32, #B87333); color: white; }
+        .rank-other { background: var(--input-bg); border: 2px solid var(--border-color); }
+        .user-info { flex: 1; }
+        .user-name { font-weight: 700; font-size: 15px; }
+        .user-level { font-size: 12px; color: var(--text-secondary); }
+        .user-stats-mini { display: flex; gap: 15px; font-size: 14px; font-weight: 700; }
+        .user-coins { color: var(--coin-gold); }
+
+        /* ============ PROFILE ============ */
+        .profile-header { text-align: center; padding: 20px; }
+        .profile-avatar {
+            width: 120px; height: 120px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 60px; margin: 0 auto 15px; border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: pulse 3s infinite;
+        }
+        .profile-name { font-size: 24px; font-weight: 900; margin-bottom: 5px; }
+        .profile-username { color: var(--text-secondary); font-size: 14px; margin-bottom: 15px; }
+        .profile-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .profile-stat { text-align: center; padding: 15px; background: var(--input-bg); border-radius: 15px; }
+        .profile-stat-value { font-size: 24px; font-weight: 900; color: var(--primary); }
+        .profile-stat-label { font-size: 11px; color: var(--text-secondary); margin-top: 3px; }
+        .profile-badges { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 15px; }
+        .profile-badge { font-size: 28px; filter: drop-shadow(0 3px 8px rgba(0,0,0,0.2)); }
+
+        /* ============ CONTACT ============ */
+        .contact-grid { display: grid; gap: 15px; }
+        .contact-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
+            border-radius: 20px; padding: 20px; display: flex;
+            align-items: center; gap: 15px; cursor: pointer;
+            transition: all 0.3s; border: 2px solid var(--border-color);
+        }
+        .contact-card:hover { transform: translateX(5px); border-color: var(--secondary); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .contact-icon {
+            width: 55px; height: 55px; border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: white; flex-shrink: 0;
+        }
+        .contact-icon.phone { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .contact-icon.email { background: linear-gradient(135deg, #eb3349, #f45c43); }
+        .contact-icon.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .contact-info { flex: 1; }
+        .contact-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 3px; }
+        .contact-value { font-weight: 700; font-size: 15px; }
+        .contact-arrow { font-size: 20px; color: var(--text-secondary); }
+
+        /* ============ SETTINGS ============ */
+        .settings-list { display: flex; flex-direction: column; gap: 12px; }
+        .setting-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px; background: var(--input-bg); border-radius: 15px;
+        }
+        .setting-info { display: flex; align-items: center; gap: 12px; }
+        .setting-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 18px;
+        }
+        .setting-text { font-weight: 600; }
+        .setting-desc { font-size: 12px; color: var(--text-secondary); }
+        .toggle { position: relative; width: 55px; height: 32px; }
+        .toggle input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--input-bg); border-radius: 32px;
+            transition: 0.4s; border: 2px solid var(--border-color);
+        }
+        .toggle-slider::before {
+            position: absolute; content: ""; height: 24px; width: 24px;
+            left: 2px; bottom: 2px; background: white;
+            border-radius: 50%; transition: 0.4s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        input:checked + .toggle-slider { background: var(--success); border-color: var(--success); }
+        input:checked + .toggle-slider::before { transform: translateX(23px); }
+
+        /* ============ BOTTOM NAVIGATION ============ */
+        .bottom-nav {
+            position: fixed; bottom: 0; width: 100%; max-width: 650px;
+            left: 50%; transform: translateX(-50%);
+            background: var(--nav-bg); backdrop-filter: blur(20px);
+            display: flex; justify-content: space-around; padding: 12px 10px;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.15); z-index: 100;
+            border-top-left-radius: 25px; border-top-right-radius: 25px;
+            border: 1px solid var(--border-color);
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 4px; padding: 8px 12px; border-radius: 15px;
+            cursor: pointer; transition: all 0.3s; flex: 1; max-width: 80px;
+        }
+        .nav-item:hover { background: rgba(255,255,255,0.1); }
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(255,107,107,0.15), rgba(78,205,196,0.15));
+        }
+        .nav-icon { font-size: 24px; transition: transform 0.3s; }
+        .nav-item.active .nav-icon { transform: scale(1.2); }
+        .nav-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+        .nav-item.active .nav-label { color: var(--primary); }
+
+        /* ============ COIN ANIMATION ============ */
+        .coin-fly {
+            position: fixed; font-size: 30px; z-index: 1000;
+            pointer-events: none; animation: flyCoin 1s ease-out forwards;
+        }
+        @keyframes flyCoin {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx, 0), var(--ty, -200px)) scale(0.3); opacity: 0; }
+        }
+
+        /* ============ CONFETTI ============ */
+        .confetti {
+            position: fixed; width: 12px; height: 12px;
+            border-radius: 2px; z-index: 999;
+            pointer-events: none; animation: confettiFall linear forwards;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ============ ACHIEVEMENT POPUP ============ */
+        .achievement-popup {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--card-bg); padding: 30px;
+            border-radius: 25px; z-index: 2000;
+            text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            display: none; max-width: 320px;
+            border: 3px solid var(--coin-gold);
+            animation: popupBounce 0.5s ease forwards;
+        }
+        .achievement-popup.show { display: block; }
+        @keyframes popupBounce {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        .achievement-popup-icon { font-size: 60px; margin-bottom: 15px; animation: bounce 1s infinite; }
+        .achievement-popup-title { font-size: 20px; font-weight: 900; color: var(--coin-gold); margin-bottom: 8px; }
+        .achievement-popup-desc { color: var(--text-secondary); margin-bottom: 20px; }
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 1999; display: none;
+        }
+        .overlay.show { display: block; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 480px) {
+            .header-content { flex-wrap: wrap; gap: 10px; }
+            .logo-text { font-size: 18px; }
+            .stat-pill { font-size: 12px; padding: 5px 12px; }
+            .shop-grid { grid-template-columns: repeat(2, 1fr); }
+            .profile-stats { grid-template-columns: repeat(3, 1fr); }
+            .question-text { font-size: 18px; padding: 15px; }
+            .option-card { padding: 15px; font-size: 15px; }
+            .btn { padding: 12px 24px; font-size: 14px; }
+            .bottom-nav { padding: 10px 5px; }
+            .nav-icon { font-size: 22px; }
+            .nav-label { font-size: 10px; }
+            .modal { margin: 10px; }
+            .modal-footer { flex-direction: column; }
+            .modal-btn { width: 100%; }
+        }
+
+        /* ============ UTILITIES ============ */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .text-bold { font-weight: 700; }
+        .text-gold { color: var(--coin-gold); }
+        .text-purple { color: var(--purple); }
+        .mt-10 { margin-top: 10px; }
+        .mt-20 { margin-top: 20px; }
+        .mb-10 { margin-bottom: 10px; }
+        .mb-20 { margin-bottom: 20px; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <!-- 🔔 Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">STUDY පොඩ්ඩෝ</span>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="toggleTheme()" title="තේමාව">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="header-btn" onclick="toggleSound()" title="ශබ්දය">
+                    <i class="fas fa-volume-up" id="soundIcon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="user-stats">
+            <div class="stat-pill coins">🪙 <span id="coinCount">0</span></div>
+            <div class="stat-pill level">⭐ LVL <span id="levelCount">1</span></div>
+            <div class="stat-pill streak">🔥 <span id="streakCount">0</span></div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="section active">
+            
+            <!-- Daily Bonus -->
+            <div class="daily-bonus" id="dailyBonusCard" onclick="claimDailyBonus()" style="cursor: pointer;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 40px;">🎁</span>
+                    <div>
+                        <strong style="font-size: 18px;">දෛනික ත්‍යාගය!</strong>
+                        <p style="font-size: 14px; opacity: 0.9; margin: 3px 0;">දිනපතා පිවිසෙන්න - කාසි 50ක්</p>
+                        <span id="bonusStatus" style="font-size: 12px; background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 10px;">තවම ලබාගෙන නැත</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject & Difficulty Selector -->
+            <div class="card">
+                <div class="card-title">📚 විෂය තෝරන්න</div>
+                <div class="subject-selector" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;">
+                    <button class="subject-btn" style="padding: 15px; border: 3px solid var(--border-color); border-radius: 15px; background: var(--input-bg); color: var(--text-primary); font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 8px;" onclick="selectSubject('all')">
+                        <i style="font-size: 24px;">🎲</i> සියල්ල
+                    </button>
+                    <button class="subject-btn" style="padding: 15px; border: 3px solid var(--border-color); border-radius: 15px; background: var(--input-bg); color: var(--text-primary); font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 8px;" onclick="selectSubject('math')">
+                        <i style="font-size: 24px;">🔢</i> ගණිත
+                    </button>
+                    <button class="subject-btn" style="padding: 15px; border: 3px solid var(--border-color); border-radius: 15px; background: var(--input-bg); color: var(--text-primary); font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 8px;" onclick="selectSubject('science')">
+                        <i style="font-size: 24px;">🔬</i> විද්‍යාව
+                    </button>
+                    <button class="subject-btn" style="padding: 15px; border: 3px solid var(--border-color); border-radius: 15px; background: var(--input-bg); color: var(--text-primary); font-weight: 700; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 8px;" onclick="selectSubject('sinhala')">
+                        <i style="font-size: 24px;">📖</i> සිංහල
+                    </button>
+                </div>
+                
+                <div class="card-title" style="margin-top: 15px;">🎯 අමාරු මට්ටම</div>
+                <div class="difficulty-selector" style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
+                    <button class="difficulty-btn" style="padding: 8px 20px; border: 2px solid var(--border-color); border-radius: 20px; background: var(--input-bg); color: var(--text-primary); font-weight: 600; cursor: pointer; transition: all 0.3s;" onclick="selectDifficulty('easy')">පහසු</button>
+                    <button class="difficulty-btn" style="padding: 8px 20px; border: 2px solid var(--border-color); border-radius: 20px; background: var(--input-bg); color: var(--text-primary); font-weight: 600; cursor: pointer; transition: all 0.3s;" onclick="selectDifficulty('medium')">මධ්‍යම</button>
+                    <button class="difficulty-btn" style="padding: 8px 20px; border: 2px solid var(--border-color); border-radius: 20px; background: var(--input-bg); color: var(--text-primary); font-weight: 600; cursor: pointer; transition: all 0.3s;" onclick="selectDifficulty('hard')">අපහසු</button>
+                </div>
+            </div>
+
+            <!-- Quiz Card -->
+            <div class="card">
+                <div class="quiz-header">
+                    <span>ප්‍රශ්න <span id="currentQ">1</span>/<span id="totalQ">20</span></span>
+                    <div class="timer" id="timer">⏱️ <span id="timerValue">30</span>s</div>
+                </div>
+                
+                <div class="progress-wrapper">
+                    <div class="progress-label">
+                        <span>ප්‍රගතිය</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Ad Space -->
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 15px; border-radius: 15px; margin: 15px 0; color: white; text-align: center; font-weight: 600;">
+                    📢 දැන්වීම - ඔබේ වෙළඳ නාමය මෙහි!
+                </div>
+                
+                <div class="question-card">
+                    <p class="question-text" id="questionText">ප්‍රශ්නය ලෝඩ් වෙමින්...</p>
+                    <div class="options-grid" id="optionsContainer"></div>
+                </div>
+                
+                <div class="feedback" id="feedback"></div>
+                
+                <div id="bonusDisplay" class="text-center" style="display: none; margin: 15px 0;">
+                    <span style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #333; padding: 8px 20px; border-radius: 25px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+                        🔥 ස්ට්‍රීක් බෝනස්: +<span id="bonusCoins">0</span> 🪙
+                    </span>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-hint" onclick="useHint()" id="hintBtn">
+                        💡 Hint <span class="hint-cost">(-5🪙)</span>
+                    </button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display: none;">
+                        ලඟ ප්‍රශ්නය ➡️
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Stats Card -->
+            <div class="card">
+                <div class="card-title">📊 ඔබේ සමීක්ෂණය</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                    <div style="text-align: center; padding: 15px; background: rgba(81,207,102,0.1); border-radius: 15px;">
+                        <span style="font-size: 28px;">✅</span>
+                        <p style="font-weight: 700; color: var(--success); margin: 5px 0;" id="correctCount">0</p>
+                        <p style="font-size: 11px; color: var(--text-secondary);">නිවැරදි</p>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,107,107,0.1); border-radius: 15px;">
+                        <span style="font-size: 28px;">❌</span>
+                        <p style="font-weight: 700; color: var(--danger); margin: 5px 0;" id="wrongCount">0</p>
+                        <p style="font-size: 11px; color: var(--text-secondary);">වැරදි</p>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,230,109,0.1); border-radius: 15px;">
+                        <span style="font-size: 28px;">🎯</span>
+                        <p style="font-weight: 700; color: var(--warning); margin: 5px 0;" id="accuracyCount">0%</p>
+                        <p style="font-size: 11px; color: var(--text-secondary);">නිරවද්‍යතාව</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div id="notes-section" class="section">
+            
+            <!-- Search & Filter -->
+            <div class="notes-header">
+                <div class="notes-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="notesSearch" placeholder="නෝට් එකක් සොයන්න..." oninput="filterNotes()">
+                </div>
+                <div class="notes-filter">
+                    <button class="filter-btn active" onclick="filterByTag('all', this)">සියල්ල</button>
+                    <button class="filter-btn" onclick="filterByTag('formula', this)">📐 සූත්‍ර</button>
+                    <button class="filter-btn" onclick="filterByTag('definition', this)">📖 අර්ථ</button>
+                    <button class="filter-btn" onclick="filterByTag('tip', this)">💡 උපදෙස්</button>
+                </div>
+            </div>
+
+            <!-- Subject Tabs -->
+            <div class="subject-tabs">
+                <div class="subject-tab math active" onclick="filterBySubject('all', this)">
+                    <i>🎲</i> සියල්ල
+                </div>
+                <div class="subject-tab math" onclick="filterBySubject('math', this)">
+                    <i>🔢</i> ගණිත
+                </div>
+                <div class="subject-tab science" onclick="filterBySubject('science', this)">
+                    <i>🔬</i> විද්‍යාව
+                </div>
+                <div class="subject-tab sinhala" onclick="filterBySubject('sinhala', this)">
+                    <i>📖</i> සිංහල
+                </div>
+                <div class="subject-tab english" onclick="filterBySubject('english', this)">
+                    <i>🔤</i> ඉංග්‍රීසි
+                </div>
+                <div class="subject-tab ict" onclick="filterBySubject('ict', this)">
+                    <i>💻</i> ICT
+                </div>
+            </div>
+
+            <!-- Notes Grid -->
+            <div class="notes-grid" id="notesGrid"></div>
+
+            <!-- Bookmarks Section -->
+            <div class="card" id="bookmarksCard" style="display: none;">
+                <div class="card-title">🔖 මගේ බුක්මාර්ක්</div>
+                <div class="bookmarks-list" id="bookmarksList"></div>
+            </div>
+        </div>
+
+        <!-- Wheel Section -->
+        <div id="wheel-section" class="section">
+            <div class="card">
+                <div class="card-title">🎡 Lucky Wheel</div>
+                <p class="text-center" style="color: var(--text-secondary); margin-bottom: 15px;">දිනපතා කරකවන්න - අහඹු ත්‍යාග ලබාගන්න!</p>
+                
+                <div class="wheel-container">
+                    <div class="wheel-wrapper">
+                        <div class="wheel-pointer"></div>
+                        <div class="wheel" id="wheel"></div>
+                        <div class="wheel-center">🎁</div>
+                    </div>
+                    <button class="btn btn-primary spin-btn" onclick="spinWheel()" id="spinBtn">🎰 කරකවන්න!</button>
+                    <p class="wheel-result" id="wheelResult"></p>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-top: 10px;">ඊළඟ කරකැවීම: <span id="nextSpinTime">24:00:00</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop Section -->
+        <div id="shop-section" class="section">
+            <div class="card">
+                <div class="card-title">🛒 කාසි කඩේ</div>
+                <p style="color: var(--text-secondary); margin-bottom: 15px;">ඔබේ කාසි වලින් විශේෂ අයිතම මිලදී ගන්න!</p>
+                <div class="shop-grid" id="shopContainer"></div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">🎒 මගේ එකතුව</div>
+                <div class="inventory-grid" id="inventoryDisplay">
+                    <p style="color: var(--text-secondary); width: 100%;">තවම මිලදී ගත් දේවල් නැත.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div id="leaderboard-section" class="section">
+            <div class="card">
+                <div class="card-title">🏆 දක්ෂතා ලකුණු පුවරුව</div>
+                <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 14px;">රට පුරා සිටින දක්ෂතම ළමුන්</p>
+                <div class="leaderboard-list" id="leaderboardBody"></div>
+            </div>
+            
+            <div class="card" style="background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(78,205,196,0.1)); border: 2px solid var(--primary);">
+                <div class="text-center">
+                    <span style="font-size: 40px;">👑</span>
+                    <p style="font-weight: 700; margin: 10px 0;">ඔබේ ශ්‍රේණිය</p>
+                    <p style="font-size: 32px; font-weight: 900; color: var(--primary);" id="userRank">#--</p>
+                    <p style="color: var(--text-secondary);">කාසි: <span id="userRankCoins">0</span> 🪙</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile-section" class="section">
+            <div class="card profile-header">
+                <div class="profile-avatar" id="profileAvatar">🎓</div>
+                <h2 class="profile-name" id="profileName">අමුත්තා</h2>
+                <p class="profile-username">@student_<span id="profileId">12345</span></p>
+                
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="profileCoins">0</div>
+                        <div class="profile-stat-label">මුළු කාසි</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="profileLevel">1</div>
+                        <div class="profile-stat-label">ලෙවල්</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="profileQuestions">0</div>
+                        <div class="profile-stat-label">ප්‍රශ්න</div>
+                    </div>
+                </div>
+                
+                <div class="profile-badges" id="profileBadges"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">⚡ ඉක්මන් ක්‍රියා</div>
+                <div style="display: grid; gap: 12px;">
+                    <button class="btn btn-secondary" onclick="shareResults()" style="width: 100%; justify-content: center;">
+                        📤 මගේ ලකුණු බෙදාගන්න
+                    </button>
+                    <button class="btn btn-primary" onclick="inviteFriend()" style="width: 100%; justify-content: center;">
+                        👥 මිතුරෙකු ආරාධනා කරන්න (+25🪙)
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <button onclick="resetProgress()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, var(--danger), #FF8E8E); color: white; border: none; border-radius: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    🗑️ සියලු දත්ත මකන්න
+                </button>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact-section" class="section">
+            <div class="card">
+                <div class="card-title">📞 අපව අමතන්න</div>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">ඕනෑම ප්‍රශ්නයක් ඇත්නම් අපිට කතා කරන්න!</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card" onclick="makeCall()">
+                        <div class="contact-icon phone">📱</div>
+                        <div class="contact-info">
+                            <div class="contact-label">දුරකථන අංකය</div>
+                            <div class="contact-value">076 335 3368</div>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </div>
+                    
+                    <div class="contact-card" onclick="sendEmail()">
+                        <div class="contact-icon email">✉️</div>
+                        <div class="contact-info">
+                            <div class="contact-label">ඊමේල් ලිපිනය</div>
+                            <div class="contact-value">isankamalith74@gmail.com</div>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </div>
+                    
+                    <div class="contact-card" onclick="openWhatsApp()">
+                        <div class="contact-icon whatsapp">💬</div>
+                        <div class="contact-info">
+                            <div class="contact-label">WhatsApp</div>
+                            <div class="contact-value">076 335 3368</div>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">💬 කෙටි පණිවිඩය</div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <input type="text" id="msgName" placeholder="ඔබේ නම..." style="padding: 12px 15px; border: 2px solid var(--border-color); border-radius: 12px; background: var(--input-bg); color: var(--text-primary); font-size: 14px;">
+                    <textarea id="msgText" placeholder="ඔබේ පණිවිඩය..." rows="3" style="padding: 12px 15px; border: 2px solid var(--border-color); border-radius: 12px; background: var(--input-bg); color: var(--text-primary); font-size: 14px; resize: vertical;"></textarea>
+                    <button class="btn btn-primary" onclick="sendQuickMessage()" style="width: 100%; justify-content: center;">
+                        📤 WhatsApp ට යවන්න
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🌐 සමාජ මාධ්‍ය</div>
+                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
+                    <a href="#" class="header-btn" style="background: #1877F2;" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="header-btn" style="background: #FF0000;" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="header-btn" style="background: linear-gradient(135deg, #f09433, #e6683c, #dc2743);" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="header-btn" style="background: #25D366;" onclick="openWhatsApp(); return false;" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings-section" class="section">
+            <div class="card">
+                <div class="card-title">⚙️ සැකසුම්</div>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-icon">🌙</div>
+                            <div>
+                                <div class="setting-text">Dark Mode</div>
+                                <div class="setting-desc">රාත්‍රී මාදිලිය ක්‍රියාත්මක කරන්න</div>
+                            </div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="darkModeToggle" onchange="toggleTheme()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-icon">🔊</div>
+                            <div>
+                                <div class="setting-text">ශබ්දය</div>
+                                <div class="setting-desc">ධ්වනි ආචරණ ක්‍රියාත්මක කරන්න</div>
+                            </div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="soundToggle" checked onchange="toggleSound()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <p style="font-weight: 700; margin-bottom: 5px;">STUDY පොඩ්ඩෝ</p>
+                <p style="color: var(--text-secondary); font-size: 14px;">වර්ෂණය 3.0.0</p>
+                <p style="color: var(--text-secondary); font-size: 12px; margin-top: 10px;">
+                    © 2026 සියලු හිමිකම් ඇත.<br>
+                    සාදා ඇත්තේ ❤️ සමඟ ශ්‍රී ලංකාවේ
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('quiz')">
+            <span class="nav-icon">📚</span>
+            <span class="nav-label">පාඩම්</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('notes')">
+            <span class="nav-icon">📝</span>
+            <span class="nav-label">නෝට්ස්</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('wheel')">
+            <span class="nav-icon">🎡</span>
+            <span class="nav-label">Wheel</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('shop')">
+            <span class="nav-icon">🛒</span>
+            <span class="nav-label">කඩේ</span>
+        </div>
+        <div class="nav-item" onclick="switchTab('profile')">
+            <span class="nav-icon">👤</span>
+            <span class="nav-label">පැතිකඩ</span>
+        </div>
+    </nav>
+
+    <!-- Note Preview Modal -->
+    <div class="modal-overlay" id="noteModal" onclick="closeNoteModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title" id="modalNoteTitle">නෝට් එක</div>
+                <button class="modal-close" onclick="closeNoteModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-content" id="modalNoteContent"></div>
+                <div class="download-progress" id="downloadProgress">
+                    <div class="download-progress-bar">
+                        <div class="download-progress-fill" id="downloadProgressFill"></div>
+                    </div>
+                    <div class="download-progress-text" id="downloadProgressText">සූදානම් වෙමින්...</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn download" onclick="downloadNote('pdf')"><i class="fas fa-file-pdf"></i> PDF</button>
+                <button class="modal-btn download" onclick="downloadNote('txt')"><i class="fas fa-file-alt"></i> TXT</button>
+                <button class="modal-btn copy" onclick="copyNoteContent()"><i class="fas fa-copy"></i> පිටපත්</button>
+                <button class="modal-btn share" onclick="shareNote()"><i class="fas fa-share-alt"></i> බෙදාගන්න</button>
+                <button class="modal-btn bookmark" id="modalBookmarkBtn" onclick="toggleBookmarkModal()"><i class="fas fa-bookmark"></i> බුක්මාර්ක්</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievement Popup -->
+    <div class="overlay" id="popupOverlay" onclick="closeAchievementPopup()"></div>
+    <div class="achievement-popup" id="achievementPopup">
+        <div class="achievement-popup-icon">🏆</div>
+        <div class="achievement-popup-title">නව සාක්ෂිය!</div>
+        <div class="achievement-popup-desc" id="achievementPopupDesc">ඔබ පළමු වරට නිවැරදි පිළිතුරක් දුන්නා!</div>
+        <button class="btn btn-primary" onclick="closeAchievementPopup()">හරි!</button>
+    </div>
+
+    <script>
+        // ============ CONFIG ============
+        const CONFIG = {
+            CONTACT_PHONE: "0763353368",
+            CONTACT_EMAIL: "isankamalith74@gmail.com",
+            CONTACT_WHATSAPP: "94763353368",
+            COINS_PER_CORRECT: 10,
+            COINS_PER_HINT: 5,
+            SPEED_BONUS_THRESHOLD: 10,
+            SPEED_BONUS_COINS: 5,
+            LEVEL_UP_COINS: 100,
+            DAILY_BONUS_COINS: 50,
+            NOTIFICATION_DURATION: 4000,
+            DOWNLOAD_DELAY: 1500,
+            WHEEL_PRIZES: [
+                { coins: 10, chance: 40, label: "10🪙" },
+                { coins: 25, chance: 25, label: "25🪙" },
+                { coins: 50, chance: 15, label: "50🪙" },
+                { coins: 100, chance: 10, label: "100🪙" },
+                { coins: 0, chance: 10, label: "😅" }
+            ]
+        };
+
+        // ============ STATE ============
+        const state = {
+            coins: parseInt(localStorage.getItem('studyPoddoCoins')) || 0,
+            level: parseInt(localStorage.getItem('studyPoddoLevel')) || 1,
+            streak: parseInt(localStorage.getItem('studyPoddoStreak')) || 0,
+            correctAnswers: parseInt(localStorage.getItem('studyPoddoCorrect')) || 0,
+            wrongAnswers: parseInt(localStorage.getItem('studyPoddoWrong')) || 0,
+            totalQuestions: parseInt(localStorage.getItem('studyPoddoTotal')) || 0,
+            inventory: JSON.parse(localStorage.getItem('studyPoddoInventory')) || [],
+            bookmarks: JSON.parse(localStorage.getItem('studyPoddoBookmarks')) || [],
+            achievements: JSON.parse(localStorage.getItem('studyPoddoAchievements')) || [],
+            askedQuestions: JSON.parse(localStorage.getItem('studyPoddoAsked')) || [],
+            lastLogin: localStorage.getItem('studyPoddoLastLogin') || '',
+            lastWheelSpin: localStorage.getItem('studyPoddoLastWheel') || '',
+            currentSubject: 'all',
+            currentDifficulty: 'easy',
+            currentTag: 'all',
+            currentQuestion: null,
+            timer: 30,
+            timerInterval: null,
+            soundEnabled: true,
+            darkMode: false,
+            userName: 'අමුත්තා',
+            userId: Math.floor(Math.random() * 90000) + 10000
+        };
+
+        // ============ NOTIFICATION MANAGER ============
+        class NotificationManager {
+            constructor() {
+                this.container = document.getElementById('notificationContainer');
+                this.queue = [];
+                this.active = false;
+            }
+
+            show(message, type = 'success', duration = CONFIG.NOTIFICATION_DURATION, title = '') {
+                const notif = { message, type, duration, title, id: Date.now() };
+                this.queue.push(notif);
+                this.processQueue();
+            }
+
+            processQueue() {
+                if (this.active || this.queue.length === 0) return;
+                this.active = true;
+                const notif = this.queue.shift();
+                this.render(notif);
+            }
+
+            render(notif) {
+                const el = document.createElement('div');
+                el.className = `notification ${notif.type}`;
+                el.dataset.id = notif.id;
+                
+                const icons = { success: '✓', error: '✕', warning: '⚠️', info: 'ℹ️' };
+                
+                el.innerHTML = `
+                    <div class="notification-icon">${icons[notif.type] || 'ℹ️'}</div>
+                    <div class="notification-content">
+                        ${notif.title ? `<div class="notification-title">${notif.title}</div>` : ''}
+                        <div class="notification-message">${notif.message}</div>
+                    </div>
+                    <button class="notification-close" onclick="notificationMgr.remove('${notif.id}')">×</button>
+                `;
+                
+                this.addSwipeSupport(el, notif.id);
+                this.container.appendChild(el);
+                setTimeout(() => this.remove(notif.id), notif.duration);
+            }
+
+            remove(id) {
+                const el = document.querySelector(`.notification[data-id="${id}"]`);
+                if (!el) return;
+                el.classList.add('hiding');
+                setTimeout(() => {
+                    el.remove();
+                    this.active = false;
+                    this.processQueue();
+                }, 300);
+            }
+
+            addSwipeSupport(el, id) {
+                let startX, currentX;
+                el.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    el.classList.add('swiping');
+                }, { passive: true });
+                el.addEventListener('touchmove', (e) => {
+                    currentX = e.touches[0].clientX;
+                    const diff = currentX - startX;
+                    if (Math.abs(diff) > 10) {
+                        el.style.transform = `translateX(${diff}px)`;
+                        el.style.opacity = 1 - Math.abs(diff) / 150;
+                    }
+                }, { passive: true });
+                el.addEventListener('touchend', () => {
+                    el.classList.remove('swiping');
+                    const diff = currentX - startX;
+                    if (Math.abs(diff) > 80) {
+                        el.classList.add('swiped-out');
+                        setTimeout(() => {
+                            el.remove();
+                            this.active = false;
+                            this.processQueue();
+                        }, 200);
+                    } else {
+                        el.style.transform = '';
+                        el.style.opacity = '';
+                    }
+                });
+            }
+
+            clear() {
+                this.queue = [];
+                document.querySelectorAll('.notification').forEach(el => el.remove());
+                this.active = false;
+            }
+        }
+
+        const notificationMgr = new NotificationManager();
+        function showNotification(message, type = 'success', duration) {
+            notificationMgr.show(message, type, duration);
+        }
+
+        // ============ QUESTIONS DATABASE ============
+        const questionsDB = [
+            { id: 1, q: "2 + 2 = ?", options: ["3", "4", "5", "6"], ans: 1, subject: 'math', difficulty: 'easy' },
+            { id: 2, q: "10 - 5 = ?", options: ["3", "4", "5", "6"], ans: 2, subject: 'math', difficulty: 'easy' },
+            { id: 3, q: "3 x 3 = ?", options: ["6", "8", "9", "12"], ans: 2, subject: 'math', difficulty: 'easy' },
+            { id: 4, q: "15 + 27 = ?", options: ["40", "42", "45", "52"], ans: 1, subject: 'math', difficulty: 'medium' },
+            { id: 5, q: "100 ÷ 4 = ?", options: ["20", "25", "30", "40"], ans: 1, subject: 'math', difficulty: 'medium' },
+            { id: 6, q: "√144 = ?", options: ["10", "11", "12", "14"], ans: 2, subject: 'math', difficulty: 'hard' },
+            { id: 7, q: "ජලයේ රසායනික සංකේතය?", options: ["O2", "CO2", "H2O", "NaCl"], ans: 2, subject: 'science', difficulty: 'easy' },
+            { id: 8, q: "මිනිසාට හුස්ම ගැනීමට අවශ්‍ය වායුව?", options: ["CO2", "O2", "N2", "H2"], ans: 1, subject: 'science', difficulty: 'easy' },
+            { id: 9, q: "පෘථිවිය හිරු වටා යාමට ගතවන කාලය?", options: ["දින 30", "දින 365", "දින 7", "දින 100"], ans: 1, subject: 'science', difficulty: 'medium' },
+            { id: 10, q: "ලෝකයේ විශාලතම සාගරය?", options: ["අත්ලාන්තික්", "ඉන්දියන්", "පැසිෆික්", "අාර්ක්ටික්"], ans: 2, subject: 'science', difficulty: 'medium' },
+            { id: 11, q: "මිනිස් සිරුරේ ඇති අස්ථි ගණන?", options: ["156", "206", "256", "306"], ans: 1, subject: 'science', difficulty: 'hard' },
+            { id: 12, q: "ශ්‍රී ලංකාවේ ජාතික මල?", options: ["නෙළුම්", "නිල් මැණික්", "තරු පිප", "අරලිය"], ans: 1, subject: 'sinhala', difficulty: 'easy' },
+            { id: 13, q: "ශ්‍රී ලංකාවේ අගනුවර?", options: ["කොළඹ", "මහනුවර", "ශ්‍රී ජයවර්ධනපුර", "ගාල්ල"], ans: 2, subject: 'sinhala', difficulty: 'easy' },
+            { id: 14, q: "ශ්‍රී ලංකාවේ දිගම ගඟ?", options: ["කළු ගඟ", "මහවැලි ගඟ", "වළවේ ගඟ", "යාන් ඔය"], ans: 1, subject: 'sinhala', difficulty: 'medium' },
+            { id: 15, q: "ශ්‍රී ලංකාවේ නිදහස ලැබූ වර්ෂය?", options: ["1945", "1948", "1950", "1955"], ans: 1, subject: 'sinhala', difficulty: 'medium' },
+            { id: 16, q: "ශ්‍රී ලංකාවේ ජාතික ගස?", options: ["පොල්", "නා", "අඹ", "කොස්"], ans: 1, subject: 'sinhala', difficulty: 'hard' },
+            { id: 17, q: "පරිගණකයේ මොළය ලෙස හැඳින්වෙන්නේ?", options: ["Monitor", "Keyboard", "CPU", "Mouse"], ans: 2, subject: 'all', difficulty: 'easy' },
+            { id: 18, q: "ලෝකයේ විශාලතම මහාද්වීපය?", options: ["අප්‍රිකාව", "යුරෝපය", "ආසියාව", "ඇමරිකාව"], ans: 2, subject: 'all', difficulty: 'medium' },
+            { id: 19, q: "ත්‍රිකෝණයක කෝණ එකතුව?", options: ["90°", "180°", "270°", "360°"], ans: 1, subject: 'all', difficulty: 'easy' },
+            { id: 20, q: "2³ = ?", options: ["4", "6", "8", "16"], ans: 2, subject: 'math', difficulty: 'hard' }
+        ];
+
+        // ============ SHORT NOTES DATABASE ============
+        const notesDB = [
+            { id: 'm1', subject: 'math', title: 'ගණිත සූත්‍ර - ප්‍රතිශත', tags: ['formula', 'quick'], content: `<h4>📐 ප්‍රතිශත සූත්‍ර</h4><ul><li>ප්‍රතිශතය = (කොටස / මුළු) × 100</li><li>උදා: 25/100 × 100 = 25%</li></ul><div class="formula">A% of B = (A × B) ÷ 100</div>`, preview: 'ප්‍රතිශත ගණනය කිරීමේ සූත්‍ර සහ වේගවත් ක්‍රම...' },
+            { id: 'm2', subject: 'math', title: 'ත්‍රිකෝණමිතිය - මූලික සූත්‍ර', tags: ['formula'], content: `<h4>📐 මූලික අනුපාත</h4><div class="formula">sin θ = ලම්බක/කර්ණ</div><div class="formula">cos θ = ආසන්න/කර්ණ</div><div class="formula">tan θ = ලම්බක/ආසන්න</div>`, preview: 'ත්‍රිකෝණමිතික අනුපාත සහ SOH CAH TOA මතක තබා ගැනීමේ ක්‍රමය...' },
+            { id: 's1', subject: 'science', title: 'ජලය - රසායනික ගුණ', tags: ['definition', 'quick'], content: `<h4>💧 ජලයේ රසායනික සංකේතය</h4><div class="formula">H₂O</div><h4>📋 මූලික කරුණු</h4><ul><li>හයිඩ්‍රජන් පරමාණු 2ක්</li><li>ඔක්සිජන් පරමාණු 1ක්</li></ul>`, preview: 'ජලයේ රසායනික සංකේතය, සංයුතිය සහ භෞතික ගුණ...' },
+            { id: 's2', subject: 'science', title: 'ප්‍රකාශය - පරාවර්තන නියම', tags: ['formula', 'tip'], content: `<h4>🔦 පරාවර්තන නියම</h4><div class="formula">∠i = ∠r</div><h4>📝 නියම 2</h4><ol><li>පතන කෝණය = පරාවර්තන කෝණය</li></ol>`, preview: 'ප්‍රකාශ පරාවර්තනයේ මූලික නියම සහ උදාහරණ...' },
+            { id: 'sh1', subject: 'sinhala', title: 'ව්‍යාකරණ - නාම පද', tags: ['definition'], content: `<h4>📖 නාම පද යනු</h4><p>පුද්ගලයින්, ස්ථාන, දේවල්, සංකල්ප නම් කිරීමට භාවිතා කරන පද වේ.</p>`, preview: 'නාම පද යනු කුමක්ද? වර්ග සහ උදාහරණ සමඟ...' },
+            { id: 'e1', subject: 'english', title: 'Tenses - Simple Present', tags: ['formula', 'definition'], content: `<h4>⏰ Simple Present Tense</h4><div class="formula">Subject + V1 (s/es) + Object</div><h4>📋 උදාහරණ</h4><ul><li>She goes to school daily.</li></ul>`, preview: 'Simple Present Tense භාවිතය, සූත්‍ර සහ උදාහරණ...' },
+            { id: 'i1', subject: 'ict', title: 'Computer Basics - Hardware', tags: ['definition', 'quick'], content: `<h4>💻 Hardware යනු</h4><p>පරිගණකයේ ස්පර්ශ කළ හැකි භෞතික කොටස් වේ.</p><ul><li>CPU: පරිගණකයේ මොළය</li><li>RAM: තාවකාලික මතකය</li></ul>`, preview: 'පරිගණක Hardware වල මූලික කොටස් සහ කාර්යයන්...' }
+        ];
+
+        // ============ SHOP ITEMS ============
+        const shopItems = [
+            { id: 1, name: "සුපිරි බැජ්", price: 50, icon: "🎖️", rarity: 'common' },
+            { id: 2, name: "රන් අවතාර්", price: 100, icon: "🦸", rarity: 'rare' },
+            { id: 3, name: "විශේෂ පෙන්සල", price: 200, icon: "✏️", rarity: 'rare' },
+            { id: 4, name: "දියමන්ති කුසලානය", price: 500, icon: "🏆", rarity: 'epic' },
+            { id: 5, name: "රොබෝ අවතාර්", price: 300, icon: "🤖", rarity: 'epic' },
+            { id: 6, name: "සිංහ රාජයා", price: 400, icon: "🦁", rarity: 'legendary' }
+        ];
+
+        // ============ LEADERBOARD DATA ============
+        const leaderboardData = [
+            { name: "කසුන්", coins: 1500, level: 15, avatar: "🦸" },
+            { name: "නිමේෂ", coins: 1200, level: 12, avatar: "🤖" },
+            { name: "සඳමාලි", coins: 950, level: 9, avatar: "🦁" },
+            { name: "ඔබ", coins: 0, level: 1, avatar: "🎓", isUser: true },
+            { name: "අමල්", coins: 400, level: 4, avatar: "⭐" }
+        ];
+
+        // ============ INITIALIZATION ============
+        document.addEventListener('DOMContentLoaded', () => {
+            initBackground();
+            initWheel();
+            updateUI();
+            loadRandomQuestion();
+            renderNotes();
+            renderShop();
+            renderLeaderboard();
+            checkDailyBonus();
+            checkWheelCooldown();
+            updateProfile();
+            
+            if (state.darkMode) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeIcon').className = 'fas fa-sun';
+                document.getElementById('darkModeToggle').checked = true;
+            }
+            
+            setTimeout(() => {
+                showNotification('🎉 STUDY පොඩ්ඩෝ වෙත සාදරයෙන් පිළිගනිමු!', 'success', 5000, 'ස්වාගතයයි');
+            }, 1000);
+        });
+
+        // ============ BACKGROUND ANIMATION ============
+        function initBackground() {
+            const bg = document.getElementById('bgAnimation');
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bg-bubble';
+                bubble.style.width = Math.random() * 80 + 40 + 'px';
+                bubble.style.height = bubble.style.width;
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.animationDuration = Math.random() * 20 + 15 + 's';
+                bg.appendChild(bubble);
+            }
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'bg-star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                bg.appendChild(star);
+            }
+        }
+
+        // ============ SAVE/LOAD STATE ============
+        function saveState() {
+            localStorage.setItem('studyPoddoCoins', state.coins);
+            localStorage.setItem('studyPoddoLevel', state.level);
+            localStorage.setItem('studyPoddoStreak', state.streak);
+            localStorage.setItem('studyPoddoCorrect', state.correctAnswers);
+            localStorage.setItem('studyPoddoWrong', state.wrongAnswers);
+            localStorage.setItem('studyPoddoTotal', state.totalQuestions);
+            localStorage.setItem('studyPoddoInventory', JSON.stringify(state.inventory));
+            localStorage.setItem('studyPoddoBookmarks', JSON.stringify(state.bookmarks));
+            localStorage.setItem('studyPoddoAsked', JSON.stringify(state.askedQuestions));
+            localStorage.setItem('studyPoddoLastLogin', state.lastLogin);
+            localStorage.setItem('studyPoddoLastWheel', state.lastWheelSpin);
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('coinCount').textContent = state.coins;
+            document.getElementById('levelCount').textContent = state.level;
+            document.getElementById('streakCount').textContent = state.streak;
+            document.getElementById('correctCount').textContent = state.correctAnswers;
+            document.getElementById('wrongCount').textContent = state.wrongAnswers;
+            
+            const accuracy = state.totalQuestions > 0 ? Math.round((state.correctAnswers / state.totalQuestions) * 100) : 0;
+            document.getElementById('accuracyCount').textContent = accuracy + '%';
+            
+            const progress = (state.askedQuestions.length / 20) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
+            
+            document.getElementById('profileCoins').textContent = state.coins;
+            document.getElementById('profileLevel').textContent = state.level;
+            document.getElementById('profileQuestions').textContent = state.totalQuestions;
+            
+            leaderboardData[3].coins = state.coins;
+            leaderboardData[3].level = state.level;
+            leaderboardData.sort((a, b) => b.coins - a.coins);
+            renderLeaderboard();
+        }
+
+        // ============ QUIZ FUNCTIONS ============
+        function selectSubject(subject) {
+            state.currentSubject = subject;
+            document.querySelectorAll('.subject-btn').forEach(btn => btn.style.borderColor = 'var(--border-color)');
+            event.currentTarget.style.borderColor = 'var(--secondary)';
+            loadRandomQuestion();
+        }
+
+        function selectDifficulty(difficulty) {
+            state.currentDifficulty = difficulty;
+            document.querySelectorAll('.difficulty-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            loadRandomQuestion();
+        }
+
+        function getAvailableQuestions() {
+            return questionsDB.filter(q => {
+                const subjectMatch = state.currentSubject === 'all' || q.subject === state.currentSubject;
+                const difficultyMatch = q.difficulty === state.currentDifficulty;
+                const notAsked = !state.askedQuestions.includes(q.id);
+                return subjectMatch && difficultyMatch && notAsked;
+            });
+        }
+
+        function loadRandomQuestion() {
+            let available = getAvailableQuestions();
+            if (available.length === 0) {
+                state.askedQuestions = [];
+                available = questionsDB.filter(q => 
+                    (state.currentSubject === 'all' || q.subject === state.currentSubject) &&
+                    q.difficulty === state.currentDifficulty
+                );
+            }
+            
+            const randomQ = available[Math.floor(Math.random() * available.length)];
+            state.currentQuestion = { ...randomQ };
+            
+            document.getElementById('questionText').textContent = `${state.askedQuestions.length + 1}. ${randomQ.q}`;
+            document.getElementById('currentQ').textContent = state.askedQuestions.length + 1;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            randomQ.options.forEach((opt, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'option-card';
+                btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + index)}</span> ${opt}`;
+                btn.onclick = () => selectOption(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+            
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('hintBtn').disabled = false;
+            document.getElementById('bonusDisplay').style.display = 'none';
+            
+            startTimer();
+        }
+
+        function startTimer() {
+            clearInterval(state.timerInterval);
+            state.timer = state.currentDifficulty === 'easy' ? 30 : state.currentDifficulty === 'medium' ? 20 : 15;
+            
+            const timerEl = document.getElementById('timerValue');
+            const timerContainer = document.getElementById('timer');
+            timerEl.textContent = state.timer;
+            timerContainer.classList.remove('warning');
+            
+            state.timerInterval = setInterval(() => {
+                state.timer--;
+                timerEl.textContent = state.timer;
+                if (state.timer <= 5) timerContainer.classList.add('warning');
+                if (state.timer <= 0) {
+                    clearInterval(state.timerInterval);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        function handleTimeout() {
+            clearInterval(state.timerInterval);
+            showFeedback('⏰ කාලය ඉවරයි!', 'error');
+            state.streak = 0;
+            state.wrongAnswers++;
+            state.totalQuestions++;
+            highlightCorrectAnswer();
+            document.getElementById('nextBtn').style.display = 'inline-flex';
+            saveState();
+        }
+
+        function selectOption(selectedIndex, btnElement) {
+            if (document.getElementById('nextBtn').style.display !== 'none') return;
+            clearInterval(state.timerInterval);
+            
+            const allBtns = document.querySelectorAll('.option-card');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            
+            const correctIndex = state.currentQuestion.ans;
+            const isCorrect = selectedIndex === correctIndex;
+            
+            if (isCorrect) {
+                btnElement.classList.add('correct');
+                state.streak++;
+                
+                let coinsEarned = CONFIG.COINS_PER_CORRECT;
+                if (state.timer >= CONFIG.SPEED_BONUS_THRESHOLD) coinsEarned += CONFIG.SPEED_BONUS_COINS;
+                if (state.streak >= 3) coinsEarned += 2;
+                if (state.streak >= 5) coinsEarned += 3;
+                if (state.streak >= 10) coinsEarned += 5;
+                
+                state.coins += coinsEarned;
+                state.correctAnswers++;
+                
+                if (coinsEarned > CONFIG.COINS_PER_CORRECT) {
+                    document.getElementById('bonusCoins').textContent = coinsEarned - CONFIG.COINS_PER_CORRECT;
+                    document.getElementById('bonusDisplay').style.display = 'block';
+                }
+                
+                showFeedback(`🎉 හරි! +${coinsEarned}🪙`, 'success');
+                createCoinFly(btnElement);
+                createConfetti();
+                
+                const newLevel = Math.floor(state.coins / CONFIG.LEVEL_UP_COINS) + 1;
+                if (newLevel > state.level) {
+                    state.level = newLevel;
+                    showNotification(`🎊 ලෙවල් ${state.level} ට උත්තීර්ණ විය!`, 'success');
+                    createConfetti();
+                }
+            } else {
+                btnElement.classList.add('wrong');
+                allBtns[correctIndex].classList.add('correct');
+                state.streak = 0;
+                state.wrongAnswers++;
+                showFeedback(`❌ වැරදියි. පිළිතුර: ${state.currentQuestion.options[correctIndex]}`, 'error');
+            }
+            
+            state.totalQuestions++;
+            state.askedQuestions.push(state.currentQuestion.id);
+            document.getElementById('nextBtn').style.display = 'inline-flex';
+            saveState();
+        }
+
+        function highlightCorrectAnswer() {
+            const allBtns = document.querySelectorAll('.option-card');
+            allBtns[state.currentQuestion.ans].classList.add('correct');
+        }
+
+        function showFeedback(message, type) {
+            const fb = document.getElementById('feedback');
+            fb.textContent = message;
+            fb.className = `feedback show ${type}`;
+        }
+
+        function nextQuestion() {
+            loadRandomQuestion();
+        }
+
+        function useHint() {
+            if (state.coins < CONFIG.COINS_PER_HINT) {
+                showNotification("කාසි ප්‍රමාණවත් නැත! 😢", 'error');
+                return;
+            }
+            state.coins -= CONFIG.COINS_PER_HINT;
+            document.getElementById('hintBtn').disabled = true;
+            
+            const allBtns = document.querySelectorAll('.option-card');
+            const correctIndex = state.currentQuestion.ans;
+            let removed = 0;
+            
+            allBtns.forEach((btn, index) => {
+                if (index !== correctIndex && removed < 2) {
+                    btn.style.opacity = '0.3';
+                    btn.style.pointerEvents = 'none';
+                    removed++;
+                }
+            });
+            
+            showNotification("💡 2 වැරදි පිළිතුරු ඉවත් කළා!", 'success');
+            saveState();
+        }
+
+        // ============ WHEEL FUNCTIONS ============
+        function initWheel() {
+            const wheel = document.getElementById('wheel');
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#9775FA', '#51CF66', '#FFB84D'];
+            const segmentAngle = 360 / CONFIG.WHEEL_PRIZES.length;
+            
+            CONFIG.WHEEL_PRIZES.forEach((prize, index) => {
+                const segment = document.createElement('div');
+                segment.className = 'wheel-segment';
+                segment.style.transform = `rotate(${index * segmentAngle}deg)`;
+                segment.style.background = colors[index % colors.length];
+                segment.textContent = prize.label;
+                wheel.appendChild(segment);
+            });
+        }
+
+        function spinWheel() {
+            const btn = document.getElementById('spinBtn');
+            const resultEl = document.getElementById('wheelResult');
+            const wheel = document.getElementById('wheel');
+            
+            if (btn.disabled) return;
+            btn.disabled = true;
+            resultEl.textContent = '';
+            
+            const rand = Math.random() * 100;
+            let cumulative = 0;
+            let selectedPrize = CONFIG.WHEEL_PRIZES[0];
+            
+            for (const prize of CONFIG.WHEEL_PRIZES) {
+                cumulative += prize.chance;
+                if (rand <= cumulative) {
+                    selectedPrize = prize;
+                    break;
+                }
+            }
+            
+            const segmentAngle = 360 / CONFIG.WHEEL_PRIZES.length;
+            const prizeIndex = CONFIG.WHEEL_PRIZES.indexOf(selectedPrize);
+            const targetAngle = 1800 + (360 - (prizeIndex * segmentAngle) - segmentAngle/2);
+            
+            wheel.style.transform = `rotate(${targetAngle}deg)`;
+            
+            setTimeout(() => {
+                if (selectedPrize.coins > 0) {
+                    state.coins += selectedPrize.coins;
+                    resultEl.innerHTML = `<span style="color:var(--success)">🎉 ${selectedPrize.label} ලැබුණා!</span>`;
+                    createCoinFly(document.getElementById('wheel'));
+                    createConfetti();
+                    showNotification(`${selectedPrize.label} ලැබුණා! 🪙`, 'success');
+                } else {
+                    resultEl.innerHTML = `<span style="color:var(--warning)">😅 ඊළඟ වරට උත්සාහ කරන්න!</span>`;
+                }
+                
+                state.lastWheelSpin = new Date().toISOString();
+                checkWheelCooldown();
+                saveState();
+                btn.disabled = false;
+            }, 4000);
+        }
+
+        function checkWheelCooldown() {
+            const btn = document.getElementById('spinBtn');
+            const nextTimeEl = document.getElementById('nextSpinTime');
+            
+            if (!state.lastWheelSpin) {
+                btn.disabled = false;
+                nextTimeEl.textContent = 'දැන්ම කරකවන්න!';
+                return;
+            }
+            
+            const lastSpin = new Date(state.lastWheelSpin);
+            const now = new Date();
+            const hoursDiff = 24 - Math.floor((now - lastSpin) / (1000 * 60 * 60));
+            
+            if (hoursDiff <= 0) {
+                btn.disabled = false;
+                nextTimeEl.textContent = 'දැන්ම කරකවන්න!';
+            } else {
+                btn.disabled = true;
+                nextTimeEl.textContent = `${hoursDiff}:00:00`;
+            }
+        }
+
+        // ============ NOTES FUNCTIONS ============
+        function renderNotes() {
+            const grid = document.getElementById('notesGrid');
+            const searchTerm = document.getElementById('notesSearch')?.value.toLowerCase() || '';
+            
+            let filtered = notesDB.filter(note => {
+                const subjectMatch = state.currentSubject === 'all' || note.subject === state.currentSubject;
+                const tagMatch = state.currentTag === 'all' || note.tags.includes(state.currentTag);
+                const searchMatch = !searchTerm || note.title.toLowerCase().includes(searchTerm) || note.preview.toLowerCase().includes(searchTerm);
+                return subjectMatch && tagMatch && searchMatch;
+            });
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-title">නෝට්ස් හමු නොවීය</div><div class="empty-state-desc">වෙනත් විෂයක් හෝ යෙදුමක් උත්සාහ කරන්න</div></div>`;
+                return;
+            }
+            
+            grid.innerHTML = filtered.map(note => {
+                const isBookmarked = state.bookmarks.includes(note.id);
+                const tags = note.tags.map(tag => {
+                    const labels = { formula: '📐 සූත්‍ර', definition: '📖 අර්ථ', tip: '💡 උපදෙස්', quick: '⚡ වේගවත්' };
+                    return `<span class="note-tag ${tag}">${labels[tag] || tag}</span>`;
+                }).join('');
+                
+                return `
+                    <div class="note-card ${note.subject} ${isBookmarked ? 'bookmarked' : ''}" onclick="openNoteModal('${note.id}')" data-note-id="${note.id}">
+                        <div class="note-header">
+                            <div class="note-title">${note.title}</div>
+                            <span class="note-subject ${note.subject}">${note.subject}</span>
+                        </div>
+                        <div class="note-preview">${note.preview}</div>
+                        <div class="note-tags">${tags}</div>
+                        <div class="note-meta">
+                            <div class="note-stats">
+                                <span class="note-stat"><i>👁️</i> 1.2k</span>
+                                <span class="note-stat"><i>👍</i> 245</span>
+                            </div>
+                            <div class="note-actions">
+                                <button class="note-action-btn bookmark ${isBookmarked ? 'active' : ''}" onclick="event.stopPropagation(); toggleBookmark('${note.id}')"><i class="fas fa-bookmark"></i></button>
+                                <button class="note-action-btn" onclick="event.stopPropagation(); quickDownload('${note.id}')"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            updateBookmarksSection();
+        }
+
+        function filterBySubject(subject, btn) {
+            state.currentSubject = subject;
+            document.querySelectorAll('.subject-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderNotes();
+            showNotification(`${subject === 'all' ? 'සියලු' : subject} නෝට්ස් පෙන්වයි`, 'info', 2000);
+        }
+
+        function filterByTag(tag, btn) {
+            state.currentTag = tag;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderNotes();
+        }
+
+        function filterNotes() {
+            renderNotes();
+        }
+
+        let currentNoteId = null;
+
+        function openNoteModal(noteId) {
+            const note = notesDB.find(n => n.id === noteId);
+            if (!note) return;
+            
+            currentNoteId = noteId;
+            document.getElementById('modalNoteTitle').textContent = note.title;
+            document.getElementById('modalNoteContent').innerHTML = note.content;
+            
+            const isBookmarked = state.bookmarks.includes(noteId);
+            const bookmarkBtn = document.getElementById('modalBookmarkBtn');
+            bookmarkBtn.classList.toggle('active', isBookmarked);
+            bookmarkBtn.innerHTML = `<i class="fas fa-bookmark"></i> ${isBookmarked ? 'බුක්මාර්ක් කළා' : 'බුක්මාර්ක්'}`;
+            
+            document.getElementById('noteModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeNoteModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('noteModal').classList.remove('show');
+            document.body.style.overflow = '';
+            currentNoteId = null;
+        }
+
+        function downloadNote(format) {
+            if (!currentNoteId) return;
+            const note = notesDB.find(n => n.id === currentNoteId);
+            if (!note) return;
+            
+            const progress = document.getElementById('downloadProgress');
+            const fill = document.getElementById('downloadProgressFill');
+            const text = document.getElementById('downloadProgressText');
+            
+            progress.classList.add('show');
+            fill.style.width = '0%';
+            text.textContent = 'සූදානම් වෙමින්...';
+            
+            let progressValue = 0;
+            const interval = setInterval(() => {
+                progressValue += Math.random() * 30;
+                if (progressValue >= 100) {
+                    progressValue = 100;
+                    clearInterval(interval);
+                    
+                    setTimeout(() => {
+                        const content = note.content.replace(/<[^>]*>/g, '');
+                        const filename = `${note.title.replace(/\s+/g, '_')}.${format}`;
+                        const blob = new Blob([content], { type: 'text/plain' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        
+                        text.textContent = '✅ බාගත කිරීම සම්පූර්ණයි!';
+                        showNotification(`${filename} බාගත කළා! 📥`, 'success');
+                        setTimeout(() => progress.classList.remove('show'), 2000);
+                    }, 300);
+                } else {
+                    fill.style.width = progressValue + '%';
+                    text.textContent = `බාගත වෙමින්... ${Math.round(progressValue)}%`;
+                }
+            }, 100);
+        }
+
+        function copyNoteContent() {
+            if (!currentNoteId) return;
+            const note = notesDB.find(n => n.id === currentNoteId);
+            if (!note) return;
+            
+            const text = note.content.replace(/<[^>]*>/g, '').trim();
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('පිටපත් කළා! 📋', 'success');
+            }).catch(() => {
+                showNotification('පිටපත් කිරීම අසාර්ථකයි', 'error');
+            });
+        }
+
+        function shareNote() {
+            if (!currentNoteId) return;
+            const note = notesDB.find(n => n.id === currentNoteId);
+            if (!note) return;
+            
+            const shareText = `📚 ${note.title}\n\n${note.preview}\n\nSTUDY පොඩ්ඩෝ වෙතින් - ඉගෙන ගනිමු සල්ලි හොයමු! 🎓`;
+            
+            if (navigator.share) {
+                navigator.share({ title: note.title, text: shareText, url: window.location.href }).catch(() => {});
+            } else {
+                copyNoteContent();
+                showNotification('ලින්කුව පිටපත් කළා! මිතුරන්ට යවන්න 📤', 'success');
+            }
+        }
+
+        function toggleBookmark(noteId) {
+            const index = state.bookmarks.indexOf(noteId);
+            if (index === -1) {
+                state.bookmarks.push(noteId);
+                showNotification('බුක්මාර්ක් කළා! 🔖', 'success');
+            } else {
+                state.bookmarks.splice(index, 1);
+                showNotification('බුක්මාර්ක් ඉවත් කළා', 'info');
+            }
+            localStorage.setItem('studyPoddoBookmarks', JSON.stringify(state.bookmarks));
+            renderNotes();
+            if (currentNoteId === noteId) {
+                const btn = document.getElementById('modalBookmarkBtn');
+                btn.classList.toggle('active');
+                const isBookmarked = state.bookmarks.includes(noteId);
+                btn.innerHTML = `<i class="fas fa-bookmark"></i> ${isBookmarked ? 'බුක්මාර්ක් කළා' : 'බුක්මාර්ක්'}`;
+            }
+        }
+
+        function toggleBookmarkModal() {
+            if (currentNoteId) toggleBookmark(currentNoteId);
+        }
+
+        function quickDownload(noteId) {
+            currentNoteId = noteId;
+            downloadNote('txt');
+        }
+
+        function updateBookmarksSection() {
+            const card = document.getElementById('bookmarksCard');
+            const list = document.getElementById('bookmarksList');
+            
+            if (state.bookmarks.length === 0) {
+                card.style.display = 'none';
+                return;
+            }
+            
+            card.style.display = 'block';
+            const bookmarkedNotes = notesDB.filter(n => state.bookmarks.includes(n.id));
+            
+            list.innerHTML = bookmarkedNotes.map(note => `
+                <div class="bookmark-item" onclick="openNoteModal('${note.id}')">
+                    <div class="bookmark-icon" style="background: var(--note-${note.subject})">
+                        ${note.subject === 'math' ? '🔢' : note.subject === 'science' ? '🔬' : note.subject === 'sinhala' ? '📖' : note.subject === 'english' ? '🔤' : '💻'}
+                    </div>
+                    <div class="bookmark-info">
+                        <div class="bookmark-title">${note.title}</div>
+                        <div class="bookmark-subject">${note.subject.toUpperCase()}</div>
+                    </div>
+                    <button class="bookmark-remove" onclick="event.stopPropagation(); toggleBookmark('${note.id}')"><i class="fas fa-times"></i></button>
+                </div>
+            `).join('');
+        }
+
+        // ============ SHOP FUNCTIONS ============
+        function renderShop() {
+            const container = document.getElementById('shopContainer');
+            container.innerHTML = '';
+            
+            shopItems.forEach(item => {
+                const isOwned = state.inventory.includes(item.id);
+                const itemEl = document.createElement('div');
+                itemEl.className = `shop-item ${isOwned ? 'owned' : ''}`;
+                itemEl.innerHTML = `
+                    <span class="item-icon">${item.icon}</span>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-price">${isOwned ? 'මිලදී ගත්' : `${item.price} 🪙`}</div>
+                    <span class="item-rarity rarity-${item.rarity}">${item.rarity.toUpperCase()}</span>
+                `;
+                
+                if (!isOwned) {
+                    itemEl.onclick = () => buyItem(item);
+                }
+                container.appendChild(itemEl);
+            });
+        }
+
+        function buyItem(item) {
+            if (state.coins >= item.price) {
+                state.coins -= item.price;
+                state.inventory.push(item.id);
+                showNotification(`${item.name} මිලදී ගත්තා! 🎉`, 'success');
+                createConfetti();
+                renderShop();
+                renderInventory();
+                updateProfile();
+                saveState();
+            } else {
+                showNotification("කාසි ප්‍රමාණවත් නැත! 😢", 'error');
+            }
+        }
+
+        function renderInventory() {
+            const container = document.getElementById('inventoryDisplay');
+            if (state.inventory.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-secondary); width:100%;">තවම මිලදී ගත් දේවල් නැත.</p>';
+                return;
+            }
+            container.innerHTML = '';
+            state.inventory.forEach(itemId => {
+                const item = shopItems.find(i => i.id === itemId);
+                if (item) {
+                    const el = document.createElement('span');
+                    el.className = 'inventory-item';
+                    el.textContent = item.icon;
+                    el.title = item.name;
+                    container.appendChild(el);
+                }
+            });
+        }
+
+        // ============ LEADERBOARD ============
+        function renderLeaderboard() {
+            const tbody = document.getElementById('leaderboardBody');
+            tbody.innerHTML = '';
+            
+            leaderboardData.forEach((user, index) => {
+                const rankClass = index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : 'rank-other';
+                const rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`;
+                
+                const row = document.createElement('div');
+                row.className = `leaderboard-item ${user.isUser ? 'current-user' : ''}`;
+                row.innerHTML = `
+                    <div class="rank-badge ${rankClass}">${rankIcon}</div>
+                    <div class="user-info">
+                        <div class="user-name">${user.avatar} ${user.name}${user.isUser ? ' (ඔබ)' : ''}</div>
+                        <div class="user-level">ලෙවල් ${user.level}</div>
+                    </div>
+                    <div class="user-stats-mini">
+                        <span class="user-coins">${user.coins}🪙</span>
+                    </div>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            const userIndex = leaderboardData.findIndex(u => u.isUser) + 1;
+            document.getElementById('userRank').textContent = `#${userIndex}`;
+            document.getElementById('userRankCoins').textContent = state.coins;
+        }
+
+        // ============ PROFILE ============
+        function updateProfile() {
+            if (state.inventory.length > 0) {
+                const lastItem = shopItems.find(i => i.id === state.inventory[state.inventory.length - 1]);
+                if (lastItem) {
+                    document.getElementById('profileAvatar').textContent = lastItem.icon;
+                }
+            }
+        }
+
+        // ============ DAILY BONUS ============
+        function checkDailyBonus() {
+            const today = new Date().toDateString();
+            const bonusCard = document.getElementById('dailyBonusCard');
+            const bonusStatus = document.getElementById('bonusStatus');
+            
+            if (state.lastLogin === today) {
+                bonusCard.style.opacity = '0.7';
+                bonusCard.style.cursor = 'default';
+                bonusStatus.textContent = '✅ අද දින ලබාගෙන ඇත';
+            } else {
+                bonusCard.style.opacity = '1';
+                bonusCard.style.cursor = 'pointer';
+                bonusStatus.textContent = '👆 ක්ලික් කර ලබාගන්න';
+            }
+        }
+
+        function claimDailyBonus() {
+            const today = new Date().toDateString();
+            if (state.lastLogin === today) return;
+            
+            state.coins += CONFIG.DAILY_BONUS_COINS;
+            state.lastLogin = today;
+            
+            showNotification(`🎁 දෛනික ත්‍යාගය: ${CONFIG.DAILY_BONUS_COINS}🪙!`, 'success');
+            createConfetti();
+            createCoinFly(document.getElementById('dailyBonusCard'));
+            checkDailyBonus();
+            saveState();
+        }
+
+        // ============ CONTACT FUNCTIONS ============
+        function makeCall() { window.location.href = `tel:${CONFIG.CONTACT_PHONE}`; }
+        function sendEmail() { window.location.href = `mailto:${CONFIG.CONTACT_EMAIL}?subject=STUDY පොඩ්ඩෝ වෙබ් අඩවියෙන්&body=ආයුබෝවන්,%0D%0A%0D%0Aමට ඔබව සම්බන්ධ කරගන්න අවශ්‍ය වූයේ...`; }
+        function openWhatsApp() {
+            const message = "ආයුබෝවන්! මට STUDY පොඩ්ඩෝ වෙබ් අඩවිය ගැන විමසන්න තියෙනවා.";
+            window.open(`https://wa.me/${CONFIG.CONTACT_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+        function sendQuickMessage() {
+            const name = document.getElementById('msgName').value.trim();
+            const text = document.getElementById('msgText').value.trim();
+            if (!name || !text) { showNotification("නම සහ පණිවිඩය ඇතුළත් කරන්න! 😊", 'error'); return; }
+            const message = `*නම:* ${name}%0A*පණිවිඩය:* ${text}`;
+            window.open(`https://wa.me/${CONFIG.CONTACT_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+            document.getElementById('msgName').value = '';
+            document.getElementById('msgText').value = '';
+            showNotification("පණිවිඩය යැවුණා! 📤", 'success');
+        }
+
+        // ============ SOCIAL & SHARING ============
+        function shareResults() {
+            const accuracy = state.totalQuestions > 0 ? Math.round((state.correctAnswers / state.totalQuestions) * 100) : 0;
+            const text = `🎓 මම STUDY පොඩ්ඩෝ වලින් ඉගෙන ගන්නවා!%0A%0A📊 මගේ ලකුණු:%0A✅ නිවැරදි: ${state.correctAnswers}%0A❌ වැරදි: ${state.wrongAnswers}%0A🎯 නිරවද්‍යතාව: ${accuracy}%%0A🪙 කාසි: ${state.coins}%0A⭐ ලෙවල්: ${state.level}%0A%0Aඔබත් උත්සාහ කරන්න! 🚀`;
+            if (navigator.share) {
+                navigator.share({ title: 'STUDY පොඩ්ඩෝ', text: 'මගේ ඉගෙනීමේ ප්‍රගතිය බලන්න!', url: window.location.href });
+            } else {
+                window.open(`https://wa.me/?text=${text}`, '_blank');
+            }
+        }
+
+        function inviteFriend() {
+            const inviteText = `🎓 STUDY පොඩ්ඩෝ වලට එන්න!%0A%0Aප්‍රශ්න විසඳලා කාසි හොයන්න, ත්‍යාග දිනන්න! 🪙🏆%0A%0A👉 මෙතනින් ආරම්භ කරන්න:`;
+            if (navigator.share) {
+                navigator.share({ title: 'STUDY පොඩ්ඩෝ ට එන්න!', text: inviteText, url: window.location.href }).then(() => {
+                    state.coins += 25;
+                    showNotification("🎉 මිතුරා ආරාධනා කළා! +25🪙", 'success');
+                    saveState();
+                });
+            } else {
+                window.open(`https://wa.me/?text=${encodeURIComponent(inviteText + ' ' + window.location.href)}`, '_blank');
+            }
+        }
+
+        // ============ SETTINGS ============
+        function toggleTheme() {
+            state.darkMode = !state.darkMode;
+            document.documentElement.setAttribute('data-theme', state.darkMode ? 'dark' : 'light');
+            document.getElementById('themeIcon').className = state.darkMode ? 'fas fa-sun' : 'fas fa-moon';
+            document.getElementById('darkModeToggle').checked = state.darkMode;
+            saveState();
+        }
+
+        function toggleSound() {
+            state.soundEnabled = !state.soundEnabled;
+            document.getElementById('soundIcon').className = state.soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+            document.getElementById('soundToggle').checked = state.soundEnabled;
+            saveState();
+        }
+
+        // ============ VISUAL EFFECTS ============
+        function createCoinFly(element) {
+            const rect = element.getBoundingClientRect();
+            const coin = document.createElement('div');
+            coin.className = 'coin-fly';
+            coin.textContent = '🪙';
+            coin.style.left = (rect.left + rect.width/2) + 'px';
+            coin.style.top = (rect.top + rect.height/2) + 'px';
+            coin.style.setProperty('--tx', `${Math.random() * 100 - 50}px`);
+            coin.style.setProperty('--ty', '-250px');
+            document.body.appendChild(coin);
+            setTimeout(() => coin.remove(), 1000);
+        }
+
+        function createConfetti() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#9775FA', '#51CF66', '#FFB84D'];
+            for (let i = 0; i < 25; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // ============ NAVIGATION ============
+        function switchTab(tabName) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`${tabName}-section`).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            if (tabName === 'notes') renderNotes();
+            if (tabName === 'shop') renderShop();
+            if (tabName === 'leaderboard') renderLeaderboard();
+            if (tabName === 'profile') updateProfile();
+        }
+
+        // ============ ACHIEVEMENT POPUP ============
+        function closeAchievementPopup() {
+            document.getElementById('achievementPopup').classList.remove('show');
+            document.getElementById('popupOverlay').classList.remove('show');
+        }
+
+        // ============ UTILITIES ============
+        function resetProgress() {
+            if (confirm("⚠️ ඔබට විශ්වාසද? සියලු ප්‍රගතිය, කාසි සහ අයිතම මකා දමනු ඇත!")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeNoteModal();
+        });
+    </script>
+</body>
+</html>
