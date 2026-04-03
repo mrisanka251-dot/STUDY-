@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>වෙසක් ආලෝකය - Vesak Light</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E4BC;
+            --dark: #1a1a2e;
+            --dark-light: #16213e;
+            --white: #ffffff;
+            --blue: #4a90e2;
+            --lotus-pink: #FFB6C1;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(22, 33, 62, 0.8)),
+                        url('https://kimi-web-img.moonshot.cn/img/nico.co.id/8b03b55268e5b317399eebe5c4cc7a3cdc065094.jpg') center/cover;
+        }
+
+        .lanterns {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .lantern {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: radial-gradient(ellipse at center, #FFD700 0%, #FFA500 40%, transparent 70%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0.9;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        .lantern:nth-child(1) { left: 5%; top: 15%; animation-delay: 0s; }
+        .lantern:nth-child(2) { left: 15%; top: 55%; animation-delay: 1s; }
+        .lantern:nth-child(3) { left: 85%; top: 25%; animation-delay: 2s; }
+        .lantern:nth-child(4) { left: 75%; top: 65%; animation-delay: 3s; }
+        .lantern:nth-child(5) { left: 45%; top: 10%; animation-delay: 1.5s; }
+        .lantern:nth-child(6) { left: 92%; top: 45%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-3deg); opacity: 0.8; }
+            50% { transform: translateY(-40px) rotate(3deg); opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease;
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(to right, var(--gold), var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.3s both;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            font-weight: 300;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--gold) 0%, #B8860B 100%);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections General */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 50px;
+            position: relative;
+            font-family: 'Cinzel', serif;
+        }
+
+        .section-title::after {
+            content: '☸';
+            display: block;
+            color: var(--gold);
+            font-size: 2rem;
+            margin-top: 15px;
+        }
+
+        /* Birth Section */
+        .birth-section {
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)),
+                        url('https://kimi-web-img.moonshot.cn/img/media-en.thaythichtructhaiminh.com/b1dfc8fbd55ed2837861822df389fb4f7199c6c6.jpg') center/cover fixed;
+            border-radius: 20px;
+            margin: 50px auto;
+            border: 2px solid var(--gold);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .content-text h3 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .content-text p {
+            line-height: 2;
+            color: #e0e0e0;
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+        }
+
+        .content-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 3px solid var(--gold);
+        }
+
+        .content-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .content-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            color: var(--gold-light);
+            font-size: 0.9rem;
+        }
+
+        /* Royal Life */
+        .royal-section {
+            background: linear-gradient(135deg, #2d2d44 0%, #1a1a2e 100%);
+            border: 3px solid var(--gold);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .royal-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://kimi-web-img.moonshot.cn/img/www.indoasia-tours.com/1ad74c5d390fad2882527817c8fa950c0fb306ff.jpg') center/cover;
+            opacity: 0.15;
+        }
+
+        /* Four Sights Cards */
+        .sights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .sight-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(26, 26, 46, 0.9) 100%);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .sight-card:hover::before {
+            left: 100%;
+        }
+
+        .sight-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+            border-color: var(--gold-light);
+        }
+
+        .sight-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .sight-card h3 {
+            color: var(--gold);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .sight-card p {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Renunciation */
+        .renunciation-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://kimi-web-img.moonshot.cn/img/rubinmuseum.org/7cab16ae80f24b13c9b6c0c6d54c0be1ddf701bf.jpg') center/cover fixed;
+            border-radius: 20px;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+
+        /* Enlightenment */
+        .enlightenment-section {
+            background: radial-gradient(ellipse at center, #1e3a2f 0%, #1a1a2e 70%);
+            position: relative;
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+        }
+
+        .bohdi-tree {
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 500px;
+            opacity: 0.2;
+            background: url('https://kimi-web-img.moonshot.cn/img/rubinmuseum.org/7cab16ae80f24b13c9b6c0c6d54c0be1ddf701bf.jpg') center/contain no-repeat;
+            pointer-events: none;
+        }
+
+        .glow-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        /* Teaching Section */
+        .teaching-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .teaching-card {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--gold);
+            padding: 35px;
+            border-radius: 0 15px 15px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .teaching-card::before {
+            content: '☸';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2rem;
+            color: rgba(212, 175, 55, 0.2);
+        }
+
+        .teaching-card:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateX(10px);
+        }
+
+        .teaching-card h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .teaching-card p {
+            line-height: 1.9;
+            color: #ddd;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--gold-light);
+            border-top: 1px solid var(--gold);
+            margin-top: 25px;
+            padding-top: 15px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* Parinirvana */
+        .parinirvana-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #2c3e50;
+            border-radius: 20px;
+            border: 3px solid var(--gold);
+        }
+
+        .parinirvana-section .section-title {
+            color: #8B4513;
+        }
+
+        .parinirvana-section .content-text h3 {
+            color: #8B4513;
+        }
+
+        .parinirvana-section .content-text p {
+            color: #555;
+        }
+
+        /* Vesak Importance */
+        .importance-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .importance-item {
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(26,26,46,0.9) 100%);
+            border-radius: 20px;
+            border: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .importance-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .importance-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .importance-number {
+            font-size: 4rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        .importance-item h3 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            font-family: 'Cinzel', serif;
+        }
+
+        .importance-item p {
+            color: #ccc;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Buddha Image Gallery */
+        .buddha-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 50px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid var(--gold);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 20px;
+            color: var(--gold);
+            font-size: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a15;
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            position: relative;
+        }
+
+        footer::before {
+            content: '☸';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            color: var(--gold);
+            background: #0a0a15;
+            padding: 0 20px;
+        }
+
+        .footer-quote {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            font-style: italic;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 2;
+            font-family: 'Noto Sans Sinhala', serif;
+        }
+
+        .dhamma-wheel {
+            width: 100px;
+            height: 100px;
+            margin: 30px auto;
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+            position: relative;
+            animation: spin 20s linear infinite;
+        }
+
+        .dhamma-wheel::before,
+        .dhamma-wheel::after {
+            content: '';
+            position: absolute;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+        }
+
+        .dhamma-wheel::before {
+            top: 20%;
+            left: 20%;
+            right: 20%;
+            bottom: 20%;
+        }
+
+        .dhamma-wheel::after {
+            top: 40%;
+            left: 40%;
+            right: 40%;
+            bottom: 40%;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .social-links a {
+            color: var(--gold);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-10px) rotate(10deg);
+            color: var(--white);
+        }
+
+        .footer-info {
+            color: #666;
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* Audio Control */
+        .audio-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 999;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .audio-control:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .lotus-loader {
+            font-size: 5rem;
+            color: var(--gold);
+            animation: lotusSpin 3s ease-in-out infinite;
+        }
+
+        @keyframes lotusSpin {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 20px 0;
+                gap: 15px;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .teaching-cards,
+            .importance-list,
+            .buddha-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .sights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Floating Lotus Decoration */
+        .floating-lotus {
+            position: fixed;
+            font-size: 2rem;
+            color: rgba(212, 175, 55, 0.1);
+            pointer-events: none;
+            animation: floatLotus 15s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes floatLotus {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="lotus-loader">✿</div>
+    </div>
+
+    <!-- Floating Lotus Decorations -->
+    <div class="floating-lotus" style="left: 10%; animation-delay: 0s;">✿</div>
+    <div class="floating-lotus" style="left: 30%; animation-delay: 5s;">✿</div>
+    <div class="floating-lotus" style="left: 50%; animation-delay: 10s;">✿</div>
+    <div class="floating-lotus" style="left: 70%; animation-delay: 3s;">✿</div>
+    <div class="floating-lotus" style="left: 90%; animation-delay: 7s;">✿</div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">☸ වෙසක් ආලෝකය</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">මුල් පිටුව</a></li>
+                <li><a href="#birth">උපත</a></li>
+                <li><a href="#royal">රාජ ජීවිතය</a></li>
+                <li><a href="#sights">සතර පෙර නිමිති</a></li>
+                <li><a href="#renunciation">මහාභිනිෂ්ක්‍රමණය</a></li>
+                <li><a href="#enlightenment">බුද්ධත්වය</a></li>
+                <li><a href="#teaching">ධර්ම දේශනා</a></li>
+                <li><a href="#parinirvana">පිරිනිවන්</a></li>
+                <li><a href="#vesak">වෙසක් වැදගත්කම</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="lanterns">
+            <div class="lantern"></div>
+            <div class="lantern"></div>
+            <div class="lantern"></div>
+            <div class="lantern"></div>
+            <div class="lantern"></div>
+            <div class="lantern"></div>
+        </div>
+        <div class="hero-content">
+            <h1>වෙසක් පෝය දිනයේ පවිත්‍ර ආලෝකය</h1>
+            <p>බුදුරජාණන් වහන්සේගේ උපත, බුද්ධත්වය සහ පිරිනිවන් පිළිබඳ ශ්‍රද්ධාවෙන් සමරනු ලබන පුණ්‍යදිනය</p>
+            <a href="#birth" class="btn-primary">බුදුසසුනේ ආරම්භය</a>
+        </div>
+    </section>
+
+    <!-- Birth Section -->
+    <section class="birth-section fade-in" id="birth">
+        <h2 class="section-title">උපත - ලුම්බිනිය</h2>
+        <div class="content-grid">
+            <div class="content-text">
+                <h3>මහාමායා දේවියගේ සිහිනය</h3>
+                <p>
+                    ක්‍රි.පූ. 623 දී ඉන්දියාවේ ලුම්බිනි උයනේදී සිද්ධාර්ථ කුමාරයා උපත ලැබීය. 
+                    මහාමායා දේවියට සිහින මගින් දෙව්ලොවින් ඇවිත් ඇතුළු වූ සුදු අලියෙකු 
+                    සමඟ බුදුරජාණන් වහන්සේ උපත ලැබූ බව විශ්වාස කෙරේ.
+                </p>
+                <p>
+                    උපත ලබන විටම කුමාරයා පා තබා උතුරු දිගට පිය මඟින් පිය නගිමින් 
+                    "මම ලෝකයේ ශ්‍රේෂ්ඨයා වෙමි" යනුවෙන් ප්‍රකාශ කළේය.
+                </p>
+            </div>
+            <div class="content-image">
+                <img src="https://kimi-web-img.moonshot.cn/img/media-en.thaythichtructhaiminh.com/b1dfc8fbd55ed2837861822df389fb4f7199c6c6.jpg" alt="ලුම්බිනි උයනේ බුදුරජාණන් වහන්සේගේ උපත">
+                <div class="image-caption">ලුම්බිනි උයනේ බුදුරජාණන් වහන්සේගේ උපත සිතුවම් කිරීමක්</div>
+            </div>
+        </div>
+        
+        <div class="buddha-gallery" style="margin-top: 50px;">
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.historyhit.com/eabde69f48036c0670c693363f72ecda55210baa.jpg" alt="මායාදේවි මන්දිරය">
+                <div class="gallery-caption">මායාදේවි මන්දිරය - ලුම්බිනි</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/gallery.thelongestwayhome.com/ae7265f910518956f0ebbf2b30e23c3c1fb063d3.jpg" alt="ලුම්බිනි දේවාලය">
+                <div class="gallery-caption">ලුම්බිනි දේවාලය - නේපාලය</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/523d724ad550dcc09d4cd3e283d590c67036604d.jpg" alt="බුදු පිළිමය">
+                <div class="gallery-caption">භාවනා කරන බුදු පිළිමයක්</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Royal Life -->
+    <section class="royal-section fade-in" id="royal">
+        <h2 class="section-title">රාජ ජීවිතය</h2>
+        <div class="content-grid">
+            <div class="content-image">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.indoasia-tours.com/1ad74c5d390fad2882527817c8fa950c0fb306ff.jpg" alt="දඹුලු රජමහා විහාරය">
+                <div class="image-caption">ශ්‍රී ලංකාවේ දඹුලු රජමහා විහාරය - බුදුරජාණන් වහන්සේගේ රාජකීය යුගය නියෝජනය කරමින්</div>
+            </div>
+            <div class="content-text">
+                <h3>සැපසම්පත් ජීවිතය</h3>
+                <p>
+                    කපිලවස්තුවේ රජ මාලිගාවේ සිද්ධාර්ථ කුමාරයා සියලු සැපසම්පත් අනුභව කරමින් 
+                    ජීවත් විය. උතුරු දිග දොරටුවෙන් පිටතට නොයන ලෙස රජතුමා උපදෙස් දුන්නේ 
+                    ලෝක දුක්ඛය දැක කුමාරයාගේ සිත වෙනස් වනු ඇතැයි බියෙනි.
+                </p>
+                <p>
+                    යසෝධරා කුමරිය සමඟ විවාහ වී රාහුල කුමාරයාගේ පියා විය. 
+                    රජ මාලිගාවේ සියලු රසවත් භෝජන, සංගීතය, නර්තනය සහ 
+                    විනෝදාංශ අනුභව කරමින් කුමාරයා කාලය ගත කළේය.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Four Sights -->
+    <section class="fade-in" id="sights">
+        <h2 class="section-title">සතර පෙර නිමිති</h2>
+        <div class="sights-grid">
+            <div class="sight-card">
+                <span class="sight-icon">👴</span>
+                <h3>වයස්ගත පුද්ගලයා</h3>
+                <p>දුර්වර්ණ වූ, දත් වැටුණු, හිසෙහි හැලුණු කෙස් ඇති වූ මහලු මිනිසෙකු දැක 
+                ජරාවේ දුක්ඛය වැටහීය. "මහණ මෙයා මාගේ පළමු පෙර නිමිතියයි" යි සිතුවේය.</p>
+            </div>
+            <div class="sight-card">
+                <span class="sight-icon">🤒</span>
+                <h3>රෝගියා</h3>
+                <p>පිළිකුලෙන් යුතුව වැටී සිටි, දුගඳ හමන රෝගී මිනිසෙකු දැක 
+                ව්‍යාධියේ බිය වැටහීය. "මහණ මෙයා මාගේ දෙවන පෙර නිමිතියයි" යි සිතුවේය.</p>
+            </div>
+            <div class="sight-card">
+                <span class="sight-icon">⚰️</span>
+                <h3>මළ සිරුර</h3>
+                <p>මිනිසුන් විසින් උසුලාගෙන යනු ලබන මළ සිරුරක් දැක 
+                මරණයේ නිශ්චයතාව වැටහීය. "මහණ මෙයා මාගේ තෙවන පෙර නිමිතියයි" යි සිතුවේය.</p>
+            </div>
+            <div class="sight-card">
+                <span class="sight-icon">🧘</span>
+                <h3>සංඝයා</h3>
+                <p>ශාන්ත වූ, නිර්මල වූ, පවිත්‍ර වූ සංඝයෙකු දැක 
+                නිවන් අරමුණු කොට ගියේය. "මහණ මෙයා මාගේ සිව්වන පෙර නිමිතියයි" යි සිතුවේය.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Renunciation -->
+    <section class="renunciation-section fade-in" id="renunciation">
+        <h2 class="section-title">මහාභිනිෂ්ක්‍රමණය</h2>
+        <div class="content-grid">
+            <div class="content-text">
+                <h3>රාත්‍රී පිටවීම</h3>
+                <p>
+                    ක්‍රි.පූ. 594 දී පුණ්ණමස පෝය දින රාත්‍රීයේ, රාහුල කුමාරයාට 
+                    නමස්කාර කොට කාන්තාවන් නිදාගෙන සිටි අවස්ථාවේදීම 
+                    කුමාරයා කන්දකන්දාර නම් අශ්වයා පිට නැගී මාලිගාවෙන් පිටත් විය.
+                </p>
+                <p>
+                    චන්න නම් සාමනේරයා සමඟ අනෝමා නදිය තෙක් ගොස් එහිදී 
+                    රාජකීය ඇඳුම් ගලවා ගිම්හල වස්ත්‍ර පැළඳ, 
+                    කේසපුත්තියෙන් හිස මුඩු කොට ආරමණ්ඩකයන්ගේ ශාසනය පිළිගත්තේය.
+                </p>
+            </div>
+            <div class="content-image">
+                <img src="https://kimi-web-img.moonshot.cn/img/rubinmuseum.org/7cab16ae80f24b13c9b6c0c6d54c0be1ddf701bf.jpg" alt="පැන්න නෙළුම් මල්">
+                <div class="image-caption">නෙළුම් මල් - බුදුසසුනේ පිරිසිදුකම නියෝජනය කරයි</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enlightenment -->
+    <section class="enlightenment-section fade-in" id="enlightenment">
+        <div class="bohdi-tree"></div>
+        <div class="glow-effect" style="top: 20%; left: 15%;"></div>
+        <div class="glow-effect" style="bottom: 20%; right: 15%; animation-delay: 2s;"></div>
+        <h2 class="section-title">බුද්ධත්වය - බෝධි වෘක්ෂය යට</h2>
+        <div class="content-grid">
+            <div class="content-image">
+                <img src="https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/523d724ad550dcc09d4cd3e283d590c67036604d.jpg" alt="බුදුරජාණන් වහන්සේ භාවනා කරමින්">
+                <div class="image-caption">බෝධි වෘක්ෂය මුල් පාසල් බුද්ධත්වයට පැමිණි අවස්ථාව</div>
+            </div>
+            <div class="content-text">
+                <h3>වේසාඛ පුර පසළොස්වක පෝය</h3>
+                <p>
+                    ක්‍රි.පූ. 588 වේසාඛ මස පසළොස්වක පෝය දින, බුද්ධ ගයාවේ 
+                    අසති පාලමේ බෝධි වෘක්ෂය මුල් පාසල් බුදුරජාණන් වහන්සේ 
+                    ප්‍රධාන භාවනා කොට වීර්යයෙන් යුතුව ධ්‍යාන සමාපත්තියට සමවදින්නට විය.
+                </p>
+                <p>
+                    මාරයාගේ සේනාව පරාජය කොට, රාත්‍රී තුන් යාමයේ 
+                    පූර්ව රාත්‍රියේ ජාතිස්සර ඤාණය, මධ්‍යම රාත්‍රියේ දිබ්බ චක්ඛු ඤාණය, 
+                    පසු රාත්‍රියේ ආසවක්ඛය ඤාණය ලබා සම්මා සම්බුද්ධත්වයට පැමිණියේය.
+                </p>
+            </div>
+        </div>
+        
+        <div class="buddha-gallery" style="margin-top: 50px;">
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.learnreligions.com/a0a01c06e814607ff13dd72ca9dbdcd071977886.jpg" alt="ධර්ම චක්‍රය">
+                <div class="gallery-caption">ධර්ම චක්‍රය - බුදුසසුනේ සංකේතය</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/buddhability.org/3b0f293c53e00d35d1333892e6b2f95ec6e597a0.png" alt="නෙළුම් මල්">
+                <div class="gallery-caption">නෙළුම් මල - පිරිසිදුකමේ සංකේතය</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/cdn2.tuoitre.vn/e25ef9ba28e7f46b17d12215a9c981ab7317cf96.jpg" alt="වෙසක් කූඩු">
+                <div class="gallery-caption">වෙසක් කූඩු තරඟය - ශ්‍රී ලංකාව</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teaching -->
+    <section class="fade-in" id="teaching">
+        <h2 class="section-title">ධර්ම දේශනා</h2>
+        <div class="teaching-cards">
+            <div class="teaching-card">
+                <h3>දුක්ඛ සත්‍යය</h3>
+                <p>උපත දුක්ඛය, ජරාව දුක්ඛය, ව්‍යාධිය දුක්ඛය, මරණය දුක්ඛය, 
+                ප්‍රියවිප්පයෝගය දුක්ඛය, අප්‍රියසම්ප්පයෝගය දුක්ඛය, 
+                යම් ඉච්ඡා න ලභති තම්පි දුක්ඛය.</p>
+                <div class="quote">"සබ්බේ සංඛාරා දුක්ඛා"</div>
+            </div>
+            <div class="teaching-card">
+                <h3>සමුදය සත්‍යය</h3>
+                <p>තණ්හාව දුක්ඛයට හේතුවයි. භවතණ්හාව, විභවතණ්හාව, 
+                විභවතණ්හාව යන ත්‍රිවිධ තණ්හාව ලෝකයේ දුක්ඛයට මූලයයි.</p>
+                <div class="quote">"තණ්හා දුක්ඛ සමුදය ගාමිනී"</div>
+            </div>
+            <div class="teaching-card">
+                <h3>මග්ග සත්‍යය</h3>
+                <p>ආර්ය අටඅංගික මාර්ගය නිවන් මගයි: සම්මා දිට්ඨි, සම්මා සංකප්ප, 
+                සම්මා වාචා, සම්මා කම්මන්ත, සම්මා ආජීව, සම්මා වායාම, 
+                සම්මා සති, සම්මා සමාධි.</p>
+                <div class="quote">"මග්ගං අට්ඨඞ්ගිකං අහු"</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parinirvana -->
+    <section class="parinirvana-section fade-in" id="parinirvana">
+        <h2 class="section-title">පිරිනිවන් පාමුක</h2>
+        <div class="content-grid">
+            <div class="content-text">
+                <h3>වේසාඛ පසළොස්වක පෝය</h3>
+                <p>
+                    ක්‍රි.පූ. 543 දී වේසාඛ මස පසළොස්වක පෝය දින, 
+                    කුසිනාරා නුවර උපවත්තන සාලයේදී බුදුරජාණන් වහන්සේ 
+                    අසාධාරණ පිරිනිවන් පා වදාළ සේක.
+                </p>
+                <p>
+                    "අප්පමාදේන සම්පාදේථ" - ප්‍රමාදයෙන් වළකින්න, 
+                    ධර්මයෙහි ඇලී සිටින්න යන අවසන් වදාළ පණිවිඩය 
+                    සියලු සත්වයාටම උතුම් උරුමයකි.
+                </p>
+            </div>
+            <div class="content-image">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.indoasia-tours.com/1ad74c5d390fad2882527817c8fa950c0fb306ff.jpg" alt="කුසිනාරා පිරිනිවන්">
+                <div class="image-caption">කුසිනාරා නුවර - පිරිනිවන් පා වදාළ ස්ථානය</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vesak Importance -->
+    <section class="fade-in" id="vesak">
+        <h2 class="section-title">වෙසක් වැදගත්කම</h2>
+        <div class="importance-list">
+            <div class="importance-item">
+                <div class="importance-number">I</div>
+                <h3>උපත</h3>
+                <p>ලුම්බිනියේදී සිද්ධාර්ථ ගෝතම කුමාරයා ලෙස උපත</p>
+            </div>
+            <div class="importance-item">
+                <div class="importance-number">II</div>
+                <h3>බුද්ධත්වය</h3>
+                <p>බුද්ධ ගයාවේ බෝධි වෘක්ෂය යට සම්මා සම්බුද්ධත්වය</p>
+            </div>
+            <div class="importance-item">
+                <div class="importance-number">III</div>
+                <h3>පිරිනිවන්</h3>
+                <p>කුසිනාරා නුවරදී අසාධාරණ පිරිනිවන්</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px;">
+            <p style="font-size: 1.2rem; color: var(--gold-light); max-width: 800px; margin: 0 auto; line-height: 2;">
+                වෙසක් පෝය දිනය ලෝක බෞද්ධයන් විසින් බුදුරජාණන් වහන්සේගේ 
+                ත්‍රිවිධ සිදුවීම් සමරනු ලබන ශ්‍රේෂ්ඨතම පුණ්‍යදිනයයි. 
+                දාන, ශීල, භාවනා ආදි ආගමික කටයුතුවල නිරත වී 
+                සිල් සමාදන් වීම මෙදින සිදු කෙරේ.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="dhamma-wheel"></div>
+        <div class="footer-quote">
+            "සබ්බ පාපස්ස අකරණං<br>
+            කුසලස්ස උපසම්පදා<br>
+            සචිත්ත පරියෝදපනං<br>
+            එතං බුද්ධාන සාසනං"
+        </div>
+        <div class="social-links">
+            <a href="#" title="Buddha">☸</a>
+            <a href="#" title="Dhamma">📿</a>
+            <a href="#" title="Sangha">🙏</a>
+            <a href="#" title="Peace">✿</a>
+        </div>
+        <div class="footer-info">
+            <p>© 2024 වෙසක් ආලෝකය - සියලුම සත්වයාට නිවන් සුව ලැබේවා!</p>
+            <p style="margin-top: 10px; font-size: 0.85rem; color: #888;">නිර්මාණය කළේ: [ඔබේ නම/පාසල]</p>
+        </div>
+    </footer>
+
+    <!-- Audio Control -->
+    <button class="audio-control" id="audioBtn" title="Background Music">🎵</button>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Sticky Navbar Effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.style.background = 'rgba(26, 26, 46, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
+            } else {
+                navbar.style.background = 'rgba(26, 26, 46, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Scroll Animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeElements.forEach(element => {
+            fadeObserver.observe(element);
+        });
+
+        // Smooth Scroll for Safari
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Audio Control (Simulated)
+        const audioBtn = document.getElementById('audioBtn');
+        let isPlaying = false;
+
+        audioBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            audioBtn.textContent = isPlaying ? '🔇' : '🎵';
+            audioBtn.style.background = isPlaying ? '#e74c3c' : 'var(--gold)';
+            
+            if (isPlaying) {
+                console.log('Playing meditation music...');
+            } else {
+                console.log('Music paused');
+            }
+        });
+
+        // Parallax Effect for Hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Dynamic Lantern Animation
+        function createLantern() {
+            const lantern = document.createElement('div');
+            lantern.className = 'lantern';
+            lantern.style.left = Math.random() * 100 + '%';
+            lantern.style.top = '100%';
+            lantern.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            lantern.style.opacity = Math.random() * 0.5 + 0.5;
+            
+            const lanterns = document.querySelector('.lanterns');
+            if (lanterns) {
+                lanterns.appendChild(lantern);
+                
+                setTimeout(() => {
+                    lantern.remove();
+                }, 7000);
+            }
+        }
+
+        // Create new lanterns periodically
+        setInterval(createLantern, 3000);
+
+        // Add current year to footer
+        const footerYear = document.querySelector('.footer-info p');
+        if (footerYear) {
+            footerYear.innerHTML = `© ${new Date().getFullYear()} වෙසක් ආලෝකය - සියලුම සත්වයාට නිවන් සුව ලැබේවා!`;
+        }
+
+        // Mouse move effect for glow
+        document.addEventListener('mousemove', (e) => {
+            const glows = document.querySelectorAll('.glow-effect');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            glows.forEach((glow, index) => {
+                const speed = (index + 1) * 20;
+                glow.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
